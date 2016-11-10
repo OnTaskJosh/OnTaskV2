@@ -12,6 +12,7 @@ namespace OnTaskV2.Models.DataModels
         public DateTime Date { get; set; }
         public DateTime Time { get; set; } //15 min increment
         public int Quantity { get; set; } // This is an eric comment. Completely irrelevant. 
+        //public string JoshEdit { get; set; }
     }
 
 }
