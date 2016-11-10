@@ -11,7 +11,7 @@ namespace OnTaskV2.Models.DataModels
         public string StoreNumber { get; set; } //FK to store
         public DateTime Date { get; set; }
         public DateTime Time { get; set; } //15 min increment
-        public int Quantity { get; set; }
+        public int Quantity { get; set; } // This is an eric comment. Completely irrelevant. 
     }
 
 }
