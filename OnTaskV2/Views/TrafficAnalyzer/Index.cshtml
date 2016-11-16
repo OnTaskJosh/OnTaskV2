@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Traffic Analyzer";
+}
+
+<h2>Traffic Analyzer</h2>
+
+<hr />
+
+
+@using (Html.BeginForm("DayTable","TrafficAnalyzer", FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                <span class="control-label col-md-2" style="font-weight: bold">Store</span>
+                <div class="col-md-10">
+                    @Html.DropDownList("storeID", ViewBag.StoresList as SelectList, "--Select--", htmlAttributes: new { @class = "form-control", @id = "storeIdDropdown" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span class="control-label col-md-2" style="font-weight: bold">Date</span>
+                <div class="col-md-10">
+                    @Html.Editor("date", new { htmlAttributes = new { @class = "form-control datecontrol", type = "date"} })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span class="control-label col-md-2" style="font-weight: bold">Target STAR</span>
+                <div class="col-md-10">
+                    @Html.Editor("star", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-4">
+                <button type="submit" class="btn btn-primary" data-loading-text="Generating..."><span class='glyphicon glyphicon-list-alt'></span> Run Data</button>
+            </div>
+        </div>
+    </div>
+}

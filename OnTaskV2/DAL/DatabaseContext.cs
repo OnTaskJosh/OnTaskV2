@@ -22,6 +22,7 @@ namespace OnTaskV2.DAL
         public DbSet<Region> Regions { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<Store> Stores { get; set; }
+        public DbSet<StoreAttribute> StoreAttributes { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<LaborStandard> LaborStandards { get; set; }
         public DbSet<TaskElement> TaskElements { get; set; }
