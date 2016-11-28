@@ -7,7 +7,7 @@ using OnTaskV2.Models.DataModels;
 
 namespace OnTaskV2.DAL
 {
-    public class DbInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<DatabaseContext>
+    public class DbInitializer : System.Data.Entity.DropCreateDatabaseAlways<DatabaseContext>
     {
         protected override void Seed(DatabaseContext dbContext)
         {
@@ -57,6 +57,14 @@ namespace OnTaskV2.DAL
                 new Store{ID = 2, Name = "FL - Orlando", Number = 101, DistrictID = 2 },
             };
             stores.ForEach(s => dbContext.Stores.Add(s));
+            dbContext.SaveChanges();
+
+            var storeAttributes = new List<StoreAttribute>
+            {
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "SundayOpen", Value = "01/01/1900 00:00:00" },
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "SundayClose", Value = "01/02/1900 00:00:00" },
+            };
+            storeAttributes.ForEach(s => dbContext.StoreAttributes.Add(s));
             dbContext.SaveChanges();
 
             var historicData = new List<HistoricData>

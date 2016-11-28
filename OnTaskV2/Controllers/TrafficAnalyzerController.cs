@@ -36,25 +36,31 @@ namespace OnTaskV2.Controllers
         [HttpPost]
         public ActionResult DayTable(int storeId, DateTime date, decimal? star)
         {
+            var timeInc = 24; //96 = 15 minute increments, 24 = hourly
+            //timeInc = GetTimeInc(); //TODO: create function
             var store = db.Stores.Find(storeId);
+            string openTimeAttr = date.DayOfWeek.ToString() + "Open";
+            string closeTimeAttr = date.DayOfWeek.ToString() + "Close";
             var table = new TA_Table()
             {
                 BaseHours = 0.0M,
                 BudgetHours = 0.0M,
                 NonSellHours = 0.0M,
                 SellingHours = 0.0M,
-                ActualHours = new decimal[96],
-                RecommendHours = new decimal[96],
-                AdjustHours = new decimal[96],
-                ConversionPercent = new decimal[96],
-                TrafficTY = new decimal[96],
-                TrafficLY = new decimal[96],
-                Transactions = new decimal[96],
-                TrafficPercent = new decimal[96],
-                TPLH = new decimal[96],
-                PlusMinusHours = new decimal[96],
+                ActualHours = new decimal[timeInc],
+                RecommendHours = new decimal[timeInc],
+                AdjustHours = new decimal[timeInc],
+                ConversionPercent = new decimal[timeInc],
+                TrafficTY = new decimal[timeInc],
+                TrafficLY = new decimal[timeInc],
+                Transactions = new decimal[timeInc],
+                TrafficPercent = new decimal[timeInc],
+                TPLH = new decimal[timeInc],
+                PlusMinusHours = new decimal[timeInc],
+                StartTime = Convert.ToDateTime(store.Attributes.Where(a=>a.Name == openTimeAttr).FirstOrDefault()?.Value),
+                EndTime = Convert.ToDateTime(store.Attributes.Where(a => a.Name == closeTimeAttr).FirstOrDefault()?.Value),
             };
-
+            table.TimeIncrement = new TimeSpan((table.EndTime - table.StartTime).Ticks / timeInc);
             try
             {
                 table.BaseHours = _storeAttributeService.GetOpenHoursSum(store, date) * Convert.ToDecimal(store.Attributes.Where(a => a.Name == "Minimum Coverage").First().Value);
@@ -67,14 +73,24 @@ namespace OnTaskV2.Controllers
             //table.NonSellHours =
 
             table.SellingHours = table.BudgetHours - table.BaseHours - table.NonSellHours;
-            table.ActualHours = _historicDataService.GetDriverVolumeBy15min("LaborHours",store.Number, date);
-            
-            table.TrafficLY = _historicDataService.GetDriverVolumeBy15min("Traffic", store.Number, date.AddYears(-1).AddDays(DateHelper.AddDayOffsetToLY(date))); //adding days keeps on the same day of week
-            table.TrafficTY = _historicDataService.GetDriverVolumeBy15min("Traffic",store.Number, date);
-            table.Transactions = _historicDataService.GetDriverVolumeBy15min("Transactions", store.Number, date);
+            if(timeInc == 96)
+            {
+                table.ActualHours = _historicDataService.GetDriverVolumeBy15min("LaborHours", store.Number, date);
+                table.TrafficLY = _historicDataService.GetDriverVolumeBy15min("Traffic", store.Number, date.AddYears(-1).AddDays(DateHelper.AddDayOffsetToLY(date))); //adding days keeps on the same day of week
+                table.TrafficTY = _historicDataService.GetDriverVolumeBy15min("Traffic", store.Number, date);
+                table.Transactions = _historicDataService.GetDriverVolumeBy15min("Transactions", store.Number, date);
+            }
+            else if(timeInc == 24)
+            {
+                table.ActualHours = _historicDataService.GetDriverVolumeByHour("LaborHours", store.Number, date);
+                table.TrafficLY = _historicDataService.GetDriverVolumeByHour("Traffic", store.Number, date.AddYears(-1).AddDays(DateHelper.AddDayOffsetToLY(date))); //adding days keeps on the same day of week
+                table.TrafficTY = _historicDataService.GetDriverVolumeByHour("Traffic", store.Number, date);
+                table.Transactions = _historicDataService.GetDriverVolumeByHour("Transactions", store.Number, date);
+            }
+
 
             var totalTraffic = table.TrafficTY.Sum();
-            for(int i=0; i<96;i++)
+            for(int i=0; i<timeInc;i++)
             {
                 if(table.Transactions[i] > 0)
                 {
@@ -113,7 +129,7 @@ namespace OnTaskV2.Controllers
             }
 
             table.TargetSTAR = Convert.ToDecimal(star);
-            return PartialView("_TrafficAnalyzerTable",table);
+            return PartialView("_DayTable-Static",table);
         }
     }
 }

@@ -23,15 +23,32 @@ namespace OnTaskV2.Models.ViewModels
         public decimal SellingHours { get; set; }
         public decimal TargetSTAR { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:0.#}", ApplyFormatInEditMode = true)]
         public decimal[] TrafficLY { get; set; } //0-95 //96 total increments in the array. 15-min increments for one full day
+        [DisplayFormat(DataFormatString = "{0:0.#}", ApplyFormatInEditMode = true)]
         public decimal[] TrafficTY { get; set; }
+        [DisplayFormat(DataFormatString = "{0:##.##%}", ApplyFormatInEditMode = true)]
         public decimal[] TrafficPercent { get; set; } //percent of time period to total traffic for the day
+        [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
         public decimal[] Transactions { get; set; }
+        [DisplayFormat(DataFormatString = "{0:##.##%}", ApplyFormatInEditMode = true)]
         public decimal[] ConversionPercent { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
         public decimal[] ActualHours { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
         public decimal[] RecommendHours { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
         public decimal[] AdjustHours { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
         public decimal[] PlusMinusHours { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
         public decimal[] TPLH { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:H:mm}", ApplyFormatInEditMode = true)]
+        public DateTime StartTime { get; set; }
+        [DisplayFormat(DataFormatString = "{0:H:mm}", ApplyFormatInEditMode = true)]
+        public DateTime EndTime { get; set; }
+        [DisplayFormat(DataFormatString = "{0:H:mm}", ApplyFormatInEditMode = true)]
+        public TimeSpan TimeIncrement { get; set; }
     }
 }

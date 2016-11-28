@@ -12,6 +12,7 @@ namespace OnTaskV2.DAL
     {
         public DatabaseContext() : base("DatabaseContext")
         {
+            Database.SetInitializer(new DbInitializer());
         }
 
         public DbSet<Client> Clients { get; set; }

@@ -60,6 +60,7 @@ namespace OnTaskV2.BLL
             List<HistoricData> hourVolData = new List<HistoricData>();
             for (int i = 0; i < 24; i++) //loop through 15 minute increments.
             {
+                hourInc = i;
                 try
                 {
                     volumes[i] = 0;
