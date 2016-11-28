@@ -1,0 +1,51 @@
+﻿@model OnTaskV2.Models.ViewModels.TA_Table
+
+<div>
+    <h4>TA_Table</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BudgetHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BudgetHours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaseHours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NonSellHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NonSellHours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SellingHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SellingHours)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TargetSTAR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TargetSTAR)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

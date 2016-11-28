@@ -26,6 +26,9 @@ namespace OnTaskV2
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/unobtrusiveajax").Include(
+                      "~/Scripts/jquery.unobtrusive-ajax.min.js"));
         }
     }
 }

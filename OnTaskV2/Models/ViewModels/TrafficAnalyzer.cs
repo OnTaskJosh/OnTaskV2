@@ -21,6 +21,7 @@ namespace OnTaskV2.Models.ViewModels
         public decimal BaseHours { get; set; }
         public decimal NonSellHours { get; set; }
         public decimal SellingHours { get; set; }
+        public decimal TargetSTAR { get; set; }
 
         public decimal[] TrafficLY { get; set; } //0-95 //96 total increments in the array. 15-min increments for one full day
         public decimal[] TrafficTY { get; set; }

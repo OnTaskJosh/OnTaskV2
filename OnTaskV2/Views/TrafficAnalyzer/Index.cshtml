@@ -7,7 +7,7 @@
 <hr />
 
 
-@using (Html.BeginForm("DayTable","TrafficAnalyzer", FormMethod.Post, new { role = "form" }))
+@using (Ajax.BeginForm("DayTable","TrafficAnalyzer", new AjaxOptions{ HttpMethod = "Post", UpdateTargetId = "replaceTableTarget"}))
 {
     @Html.AntiForgeryToken()
 
@@ -39,8 +39,27 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-4">
-                <button type="submit" class="btn btn-primary" data-loading-text="Generating..."><span class='glyphicon glyphicon-list-alt'></span> Run Data</button>
+                <button type="submit" id="generateTableSubmit" class="btn btn-primary" data-loading-text="Generating..." ><span class='glyphicon glyphicon-list-alt'></span> Run Data</button>
             </div>
         </div>
     </div>
 }
+
+<hr id="lineBreakTable" />
+<div class="col-lg-12"  style="align-content:center; text-align: center;">
+    <div id="replaceTableTarget">
+        <img src="~/img/indicator.white.gif" /> Loading Table Data...
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#lineBreakTable').hide();
+        $('#replaceTableTarget').hide();
+        $("#generateTableSubmit").click(function () {
+            $('#lineBreakTable').show();
+            $('#replaceTableTarget').show();
+            $('#replaceTableTarget').innerHTML = '<img src="~/img/indicator.white.gif" /> Loading Table Data...';
+        });
+    });
+</script>

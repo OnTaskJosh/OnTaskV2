@@ -111,8 +111,9 @@ namespace OnTaskV2.Controllers
                 }
                 table.PlusMinusHours[i] = table.ActualHours[i] - table.RecommendHours[i];
             }
-            
-            return PartialView("_DayTable",table);
+
+            table.TargetSTAR = Convert.ToDecimal(star);
+            return PartialView("_TrafficAnalyzerTable",table);
         }
     }
 }
