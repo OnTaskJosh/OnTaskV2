@@ -254,6 +254,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\TrafficAnalyzer\Index.cshtml" />
+    <Content Include="Views\TrafficAnalyzer\_DayTable-Static.cshtml" />
+    <Content Include="Views\TrafficAnalyzer\_WeekTable-Static.cshtml" />
     <Content Include="Views\TrafficAnalyzer\_DayTable.cshtml" />
     <Content Include="Views\TrafficAnalyzer\_TrafficAnalyzerTable.cshtml" />
   </ItemGroup>
