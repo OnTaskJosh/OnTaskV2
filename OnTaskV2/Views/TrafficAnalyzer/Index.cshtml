@@ -7,7 +7,7 @@
 <hr />
 
 
-@using (Ajax.BeginForm("DayTable","TrafficAnalyzer", new AjaxOptions{ HttpMethod = "Post", UpdateTargetId = "replaceTableTarget"}))
+@using (Ajax.BeginForm("WeekTable","TrafficAnalyzer", new AjaxOptions{ HttpMethod = "Post", UpdateTargetId = "replaceTableTarget", OnSuccess = "weekTableOnSuccess"}))
 {
     @Html.AntiForgeryToken()
 
@@ -18,7 +18,7 @@
             <div class="form-group">
                 <span class="control-label col-md-2" style="font-weight: bold">Store</span>
                 <div class="col-md-10">
-                    @Html.DropDownList("storeID", ViewBag.StoresList as SelectList, "--Select--", htmlAttributes: new { @class = "form-control", @id = "storeIdDropdown" })
+                    @Html.DropDownList("storeId", ViewBag.StoresList as SelectList, "--Select--", htmlAttributes: new { @class = "form-control", @id = "storeIdDropdown" })
                 </div>
             </div>
 
@@ -62,4 +62,9 @@
             $('#replaceTableTarget').innerHTML = '<img src="~/img/indicator.white.gif" /> Loading Table Data...';
         });
     });
+    
+    var weekTableOnSuccess = function (result) {
+
+    };
+
 </script>

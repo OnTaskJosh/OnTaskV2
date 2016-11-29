@@ -17,6 +17,10 @@ namespace OnTaskV2.Models.ViewModels
 
     public class TA_Table
     {
+        public int InputStoreId { get; set; }
+        public DateTime InputDate { get; set; }
+        public Decimal? InputSTAR { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         public decimal BudgetHours { get; set; }
         [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
@@ -48,6 +52,10 @@ namespace OnTaskV2.Models.ViewModels
         public decimal[] PlusMinusHours { get; set; }
         [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
         public decimal[] TPLH { get; set; }
+        [DisplayFormat(DataFormatString = "{0:$0.00}", ApplyFormatInEditMode = true)]
+        public decimal[] Sales { get; set; }
+        [DisplayFormat(DataFormatString = "{0:$0.00}", ApplyFormatInEditMode = true)]
+        public decimal[] AvgTransactions { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:h:mm}", ApplyFormatInEditMode = true)]
         public DateTime StartTime { get; set; }
