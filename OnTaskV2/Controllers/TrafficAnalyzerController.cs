@@ -32,7 +32,82 @@ namespace OnTaskV2.Controllers
             ViewBag.StoresList = new SelectList(db.Stores, "ID", "NumberName");
             return View();
         }
-        
+
+        [HttpPost]
+        public ActionResult WeekTable(int storeId, DateTime date, decimal? star)
+        {
+            var store = db.Stores.Find(storeId);
+            var sundayDate = date.AddDays(DayOfWeek.Sunday - date.DayOfWeek);
+            var timeInc = 7; // 7=daily
+            var table = new TA_Table()
+            {
+                BaseHours = 0.0M,
+                BudgetHours = 0.0M,
+                NonSellHours = 0.0M,
+                SellingHours = 0.0M,
+                ActualHours = new decimal[timeInc],
+                RecommendHours = new decimal[timeInc],
+                AdjustHours = new decimal[timeInc],
+                ConversionPercent = new decimal[timeInc],
+                TrafficTY = new decimal[timeInc],
+                TrafficLY = new decimal[timeInc],
+                Transactions = new decimal[timeInc],
+                TrafficPercent = new decimal[timeInc],
+                TPLH = new decimal[timeInc],
+                PlusMinusHours = new decimal[timeInc],
+                StartTime = sundayDate,
+                EndTime = sundayDate.AddDays(7),
+            };
+            table.TimeIncrement = new TimeSpan((table.EndTime - table.StartTime).Ticks / timeInc);
+            
+            table.ActualHours = _historicDataService.GetDriverVolumeForWeekByDay("LaborHours", store.Number, sundayDate);
+            table.TrafficLY = _historicDataService.GetDriverVolumeForWeekByDay("Traffic", store.Number, date.AddYears(-1).AddDays(DateHelper.AddDayOffsetToLY(sundayDate))); //adding days keeps on the same day of week
+            table.TrafficTY = _historicDataService.GetDriverVolumeForDayBy15min("Traffic", store.Number, sundayDate);
+            table.Transactions = _historicDataService.GetDriverVolumeForDayBy15min("Transactions", store.Number, sundayDate);
+
+            var totalTraffic = table.TrafficTY.Sum();
+            for (int i = 0; i < timeInc; i++)
+            {
+                if (table.Transactions[i] > 0)
+                {
+                    table.ConversionPercent[i] = table.Transactions[i] / table.TrafficTY[i];
+                }
+                else
+                {
+                    table.ConversionPercent[i] = 0.0M;
+                }
+                if (totalTraffic > 0)
+                {
+                    table.TrafficPercent[i] = table.TrafficTY[i] / totalTraffic;
+                }
+                else
+                {
+                    table.TrafficPercent[i] = 0.0M;
+                }
+                if (star != null && star > 0) //if star is null, set to 0
+                {
+                    table.RecommendHours[i] = (table.TrafficTY[i] / Convert.ToDecimal(star));
+                }
+                else
+                {
+                    table.RecommendHours[i] = 0.0M;
+                }
+                table.AdjustHours[i] = table.RecommendHours[i]; //default set adjusted hours to recommended hours
+                if (table.ActualHours[i] > 0)
+                {
+                    table.TPLH[i] = table.TrafficTY[i] / table.ActualHours[i];
+                }
+                else
+                {
+                    table.TPLH[i] = 0.0M;
+                }
+                table.PlusMinusHours[i] = table.ActualHours[i] - table.RecommendHours[i];
+            }
+            table.TargetSTAR = Convert.ToDecimal(star);
+            return PartialView("_WeekTable-Static", table);
+        }
+
+
         [HttpPost]
         public ActionResult DayTable(int storeId, DateTime date, decimal? star)
         {
@@ -69,23 +144,23 @@ namespace OnTaskV2.Controllers
             {
             }
 
-            table.BudgetHours = _historicDataService.GetDriverVolumeByWeek("LaborHours", store.Number, date) * (_historicDataService.GetDriverVolumeByDay("Traffic", store.Number, date) / _historicDataService.GetDriverVolumeByWeek("Traffic", store.Number, date)); // (LaborHours) * (DailyTrafficPercentOfWeek)
+            table.BudgetHours = _historicDataService.GetDriverVolumeSumByWeek("LaborHours", store.Number, date) * (_historicDataService.GetDriverVolumeSumByDay("Traffic", store.Number, date) / _historicDataService.GetDriverVolumeSumByWeek("Traffic", store.Number, date)); // (LaborHours) * (DailyTrafficPercentOfWeek)
             //table.NonSellHours =
 
             table.SellingHours = table.BudgetHours - table.BaseHours - table.NonSellHours;
             if(timeInc == 96)
             {
-                table.ActualHours = _historicDataService.GetDriverVolumeBy15min("LaborHours", store.Number, date);
-                table.TrafficLY = _historicDataService.GetDriverVolumeBy15min("Traffic", store.Number, date.AddYears(-1).AddDays(DateHelper.AddDayOffsetToLY(date))); //adding days keeps on the same day of week
-                table.TrafficTY = _historicDataService.GetDriverVolumeBy15min("Traffic", store.Number, date);
-                table.Transactions = _historicDataService.GetDriverVolumeBy15min("Transactions", store.Number, date);
+                table.ActualHours = _historicDataService.GetDriverVolumeForDayBy15min("LaborHours", store.Number, date);
+                table.TrafficLY = _historicDataService.GetDriverVolumeForDayBy15min("Traffic", store.Number, date.AddYears(-1).AddDays(DateHelper.AddDayOffsetToLY(date))); //adding days keeps on the same day of week
+                table.TrafficTY = _historicDataService.GetDriverVolumeForDayBy15min("Traffic", store.Number, date);
+                table.Transactions = _historicDataService.GetDriverVolumeForDayBy15min("Transactions", store.Number, date);
             }
             else if(timeInc == 24)
             {
-                table.ActualHours = _historicDataService.GetDriverVolumeByHour("LaborHours", store.Number, date);
-                table.TrafficLY = _historicDataService.GetDriverVolumeByHour("Traffic", store.Number, date.AddYears(-1).AddDays(DateHelper.AddDayOffsetToLY(date))); //adding days keeps on the same day of week
-                table.TrafficTY = _historicDataService.GetDriverVolumeByHour("Traffic", store.Number, date);
-                table.Transactions = _historicDataService.GetDriverVolumeByHour("Transactions", store.Number, date);
+                table.ActualHours = _historicDataService.GetDriverVolumeForDayByHour("LaborHours", store.Number, date);
+                table.TrafficLY = _historicDataService.GetDriverVolumeForDayByHour("Traffic", store.Number, date.AddYears(-1).AddDays(DateHelper.AddDayOffsetToLY(date))); //adding days keeps on the same day of week
+                table.TrafficTY = _historicDataService.GetDriverVolumeForDayByHour("Traffic", store.Number, date);
+                table.Transactions = _historicDataService.GetDriverVolumeForDayByHour("Transactions", store.Number, date);
             }
 
 
@@ -94,7 +169,7 @@ namespace OnTaskV2.Controllers
             {
                 if(table.Transactions[i] > 0)
                 {
-                    table.ConversionPercent[i] = table.Transactions[i] / table.Transactions[i];
+                    table.ConversionPercent[i] = table.Transactions[i] / table.TrafficTY[i];
                 }
                 else
                 {

@@ -23,14 +23,14 @@
         {
             <tr>
                 <td>@Model.StartTime.Add(new TimeSpan(Model.TimeIncrement.Ticks * i)).ToShortTimeString()</td>
-                <td>@Html.DisplayFor(modelItem => Model.TrafficTY[i])</td>
-                <td>@Html.DisplayFor(modelItem => Model.TrafficPercent[i])</td>
-                <td>@Html.DisplayFor(modelItem => Model.Transactions[i])</td>
-                <td>@Html.DisplayFor(modelItem => Model.ConversionPercent[i])</td>
-                <td>@Html.DisplayFor(modelItem => Model.ActualHours[i])</td>
-                <td>@Html.DisplayFor(modelItem => Model.TPLH[i])</td>
-                <td>@Html.DisplayFor(modelItem => Model.RecommendHours[i])</td>
-                <td>@Html.DisplayFor(modelItem => Model.PlusMinusHours[i])</td>
+                <td>@Model.TrafficTY[i].ToString("0.##")</td>
+                <td>@Model.TrafficPercent[i].ToString("0.##%")</td>
+                <td>@Model.Transactions[i].ToString("0.##")</td>
+                <td>@Model.ConversionPercent[i].ToString("0.##%")</td>
+                <td>@Model.ActualHours[i].ToString("0.##")</td>
+                <td>@Model.TPLH[i].ToString("0.##")</td>
+                <td>@Model.RecommendHours[i].ToString("0.##")</td>
+                <td>@Model.PlusMinusHours[i].ToString("0.##")</td>
             </tr>
         }
 
@@ -47,3 +47,45 @@
         <th>-6</th>
     </tr>
 </table>
+
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.BudgetHours)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.BudgetHours)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.BaseHours)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.BaseHours)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.NonSellHours)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.NonSellHours)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.SellingHours)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.SellingHours)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.TargetSTAR)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.TargetSTAR)
+    </dd>
+
+</dl>

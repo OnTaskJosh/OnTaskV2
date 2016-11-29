@@ -17,10 +17,15 @@ namespace OnTaskV2.Models.ViewModels
 
     public class TA_Table
     {
+        [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         public decimal BudgetHours { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         public decimal BaseHours { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
         public decimal NonSellHours { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
         public decimal SellingHours { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
         public decimal TargetSTAR { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:0.#}", ApplyFormatInEditMode = true)]
@@ -44,11 +49,11 @@ namespace OnTaskV2.Models.ViewModels
         [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
         public decimal[] TPLH { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:H:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:h:mm}", ApplyFormatInEditMode = true)]
         public DateTime StartTime { get; set; }
-        [DisplayFormat(DataFormatString = "{0:H:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:h:mm}", ApplyFormatInEditMode = true)]
         public DateTime EndTime { get; set; }
-        [DisplayFormat(DataFormatString = "{0:H:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:h:mm}", ApplyFormatInEditMode = true)]
         public TimeSpan TimeIncrement { get; set; }
     }
 }

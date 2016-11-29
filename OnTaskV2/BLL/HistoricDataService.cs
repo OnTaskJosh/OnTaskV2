@@ -24,7 +24,7 @@ namespace OnTaskV2.BLL
         #endregion
 
 
-        public decimal[] GetDriverVolumeBy15min(string driver, int storeNum, DateTime date)
+        public decimal[] GetDriverVolumeForDayBy15min(string driver, int storeNum, DateTime date)
         {
             var volumes = new decimal[96];
             var volumeData = db.HistoricData.Where(d => d.StoreNumber == storeNum && d.DriverName == driver && DbFunctions.TruncateTime(d.Date) == DbFunctions.TruncateTime(date.Date));
@@ -52,13 +52,13 @@ namespace OnTaskV2.BLL
             return volumes;
         }
 
-        public decimal[] GetDriverVolumeByHour(string driver, int storeNum, DateTime date)
+        public decimal[] GetDriverVolumeForDayByHour(string driver, int storeNum, DateTime date)
         {
             var volumes = new decimal[24];
             var volumeData = db.HistoricData.Where(d => d.StoreNumber == storeNum && d.DriverName == driver && DbFunctions.TruncateTime(d.Date) == DbFunctions.TruncateTime(date.Date));
             int hourInc = 0;
             List<HistoricData> hourVolData = new List<HistoricData>();
-            for (int i = 0; i < 24; i++) //loop through 15 minute increments.
+            for (int i = 0; i < 24; i++) //loop through hour increments.
             {
                 hourInc = i;
                 try
@@ -79,7 +79,35 @@ namespace OnTaskV2.BLL
             return volumes;
         }
 
-        public decimal GetDriverVolumeByDay(string driver, int storeNum, DateTime date)
+        public decimal[] GetDriverVolumeForWeekByDay(string driver, int storeNum, DateTime startOfWeekDate)
+        {
+            var volumes = new decimal[7];
+            DateTime endOfWeekDate = startOfWeekDate.AddDays(7);
+            var volumeData = db.HistoricData.Where(d => d.StoreNumber == storeNum && d.DriverName == driver && DbFunctions.TruncateTime(d.Date) >= DbFunctions.TruncateTime(startOfWeekDate.Date) && DbFunctions.TruncateTime(d.Date) <= DbFunctions.TruncateTime(endOfWeekDate.Date));
+            DateTime dayInc = new DateTime();
+            List<HistoricData> dayVolData = new List<HistoricData>();
+            for (int i = 0; i < 7; i++) //loop through day increments.
+            {
+                dayInc = startOfWeekDate.AddDays(i);
+                try
+                {
+                    volumes[i] = 0;
+                    dayVolData = volumeData.Where(d => DbFunctions.TruncateTime(d.Date) == DbFunctions.TruncateTime(dayInc)).ToList(); //get all volumes for the day
+                    foreach (var dataItem in dayVolData)
+                    {
+                        volumes[i] += dataItem.Quantity;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("{0} Exception caught.", e);
+                    volumes[i] = 0; //if no data, set to 0
+                }
+            }
+            return volumes;
+        }
+
+        public decimal GetDriverVolumeSumByDay(string driver, int storeNum, DateTime date)
         {
             decimal volumeTotal = 0.0M;
             var volumes = db.HistoricData.Where(d => d.StoreNumber == storeNum && d.DriverName == driver && DbFunctions.TruncateTime(d.Date) == date.Date);
@@ -93,7 +121,7 @@ namespace OnTaskV2.BLL
             return volumeTotal;
         }
 
-        public decimal GetDriverVolumeByWeek(string driver, int storeNum, DateTime date)
+        public decimal GetDriverVolumeSumByWeek(string driver, int storeNum, DateTime date)
         {
             decimal volumeTotal = 0.0M;
             DateTime startWeekDate = date.StartOfWeek(DayOfWeek.Sunday);
@@ -117,9 +145,10 @@ namespace OnTaskV2.BLL
 
     public interface IHistoricDataService
     {
-        decimal[] GetDriverVolumeBy15min(string driver, int storeNum, DateTime date);
-        decimal[] GetDriverVolumeByHour(string driver, int storeNum, DateTime date);
-        decimal GetDriverVolumeByDay(string driver, int storeNum, DateTime date);
-        decimal GetDriverVolumeByWeek(string driver, int storeNum, DateTime date);
+        decimal[] GetDriverVolumeForDayBy15min(string driver, int storeNum, DateTime date);
+        decimal[] GetDriverVolumeForDayByHour(string driver, int storeNum, DateTime date);
+        decimal[] GetDriverVolumeForWeekByDay(string driver, int storeNum, DateTime date);
+        decimal GetDriverVolumeSumByDay(string driver, int storeNum, DateTime date);
+        decimal GetDriverVolumeSumByWeek(string driver, int storeNum, DateTime date);
     }
 }
