@@ -50,14 +50,26 @@
                 }
                 <tr>
                     <th>Total</th>
-                    <th>#,###</th>
-                    <th>##%</th>
-                    <th>###</th>
-                    <th>##%</th>
-                    <th>$###,###</th>
-                    <th>$###</th>
-                    <th>###</th>
-                    <th>#</th>
+                    <th>@Model.TrafficTY.Sum().ToString("0.##")</th>
+                    <th>@Model.TrafficPercent.Sum().ToString("0.##%")</th>
+                    <th>@Model.Transactions.Sum().ToString("0.##")</th>
+                    <th>@if (Model.TrafficTY.Sum() != 0)
+                        {
+                            <span>@((Model.Transactions.Sum() / Model.TrafficTY.Sum()).ToString("0.##%"))</span>
+                        }
+                    </th>
+                    <th>@Model.Sales.Sum().ToString("$0.00")</th>
+                    <th>@if (Model.Transactions.Sum() != 0)
+                        {
+                            <span>@((Model.Sales.Sum() / Model.Transactions.Sum()).ToString("$0.00"))</span>
+                        }
+                    </th>
+                    <th>@Model.ActualHours.Sum().ToString("0.##")</th>
+                    <th>@if (Model.ActualHours.Sum() != 0)
+                        {
+                            <span>@((Model.TrafficTY.Sum() / Model.ActualHours.Sum()).ToString("0.##"))</span>
+                        }
+                    </th>
                 </tr>
             </table>
         </div>

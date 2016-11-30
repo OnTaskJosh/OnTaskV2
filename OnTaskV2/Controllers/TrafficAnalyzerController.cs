@@ -64,11 +64,12 @@ namespace OnTaskV2.Controllers
                 AvgTransactions = new decimal[timeInc],
             };
             table.TimeIncrement = new TimeSpan((table.EndTime - table.StartTime).Ticks / timeInc);
-            
+
             table.ActualHours = _historicDataService.GetDriverVolumeForWeekByDay("LaborHours", store.Number, sundayDate);
             table.TrafficLY = _historicDataService.GetDriverVolumeForWeekByDay("Traffic", store.Number, date.AddYears(-1).AddDays(DateHelper.AddDayOffsetToLY(sundayDate))); //adding days keeps on the same day of week
-            table.TrafficTY = _historicDataService.GetDriverVolumeForDayBy15min("Traffic", store.Number, sundayDate);
-            table.Transactions = _historicDataService.GetDriverVolumeForDayBy15min("Transactions", store.Number, sundayDate);
+            table.TrafficTY = _historicDataService.GetDriverVolumeForWeekByDay("Traffic", store.Number, sundayDate);
+            table.Transactions = _historicDataService.GetDriverVolumeForWeekByDay("Transactions", store.Number, sundayDate);
+            table.Sales = _historicDataService.GetDriverVolumeForWeekByDay("Sales", store.Number, sundayDate);
 
             var totalTraffic = table.TrafficTY.Sum();
             for (int i = 0; i < timeInc; i++)
@@ -107,6 +108,14 @@ namespace OnTaskV2.Controllers
                     table.TPLH[i] = 0.0M;
                 }
                 table.PlusMinusHours[i] = table.ActualHours[i] - table.RecommendHours[i];
+                if (table.Sales[i] > 0)
+                {
+                    table.AvgTransactions[i] = table.Sales[i] / table.Transactions[i];
+                }
+                else
+                {
+                    table.AvgTransactions[i] = 0.0M;
+                }
             }
             table.TargetSTAR = Convert.ToDecimal(star);
             return PartialView("_WeekTable-Static", table);
@@ -208,7 +217,7 @@ namespace OnTaskV2.Controllers
                 {
                     table.TPLH[i] = 0.0M;
                 }
-                table.PlusMinusHours[i] = table.ActualHours[i] - table.RecommendHours[i];
+                table.PlusMinusHours[i] = table.RecommendHours[i] - table.ActualHours[i];
             }
 
             table.TargetSTAR = Convert.ToDecimal(star);
