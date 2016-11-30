@@ -41,6 +41,9 @@ namespace OnTaskV2.Controllers
             var timeInc = 7; // 7=daily
             var table = new TA_Table()
             {
+                InputStoreId = storeId,
+                InputDate = date,
+                InputSTAR = star,
                 BaseHours = 0.0M,
                 BudgetHours = 0.0M,
                 NonSellHours = 0.0M,
@@ -56,7 +59,9 @@ namespace OnTaskV2.Controllers
                 TPLH = new decimal[timeInc],
                 PlusMinusHours = new decimal[timeInc],
                 StartTime = sundayDate,
-                EndTime = sundayDate.AddDays(7),
+                EndTime = sundayDate.AddDays(timeInc),
+                Sales = new decimal[timeInc],
+                AvgTransactions = new decimal[timeInc],
             };
             table.TimeIncrement = new TimeSpan((table.EndTime - table.StartTime).Ticks / timeInc);
             
@@ -109,7 +114,7 @@ namespace OnTaskV2.Controllers
 
 
         [HttpPost]
-        public ActionResult DayTable(int storeId, DateTime date, decimal? star)
+        public PartialViewResult DayTable(int storeId, DateTime date, decimal? star)
         {
             var timeInc = 24; //96 = 15 minute increments, 24 = hourly
             //timeInc = GetTimeInc(); //TODO: create function
@@ -118,6 +123,9 @@ namespace OnTaskV2.Controllers
             string closeTimeAttr = date.DayOfWeek.ToString() + "Close";
             var table = new TA_Table()
             {
+                InputStoreId = storeId,
+                InputDate = date,
+                InputSTAR = star,
                 BaseHours = 0.0M,
                 BudgetHours = 0.0M,
                 NonSellHours = 0.0M,

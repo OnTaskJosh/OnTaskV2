@@ -4,210 +4,169 @@
     ViewBag.Title = "Labor Optimization Table";
 }
 
-<div class="container">
-    <div class="panel-group">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3>Week Results</h3>
+<div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#weekTable" aria-controls="home" role="tab" data-toggle="tab">Week</a></li>
+        <li role="presentation"><a href="#sundayTable" aria-controls="sundayTable" role="tab" data-toggle="tab">Sunday</a></li>
+        <li role="presentation"><a href="#mondayTable" aria-controls="mondayTable" role="tab" data-toggle="tab">Monday</a></li>
+        <li role="presentation"><a href="#tuesdayTable" aria-controls="tuesdayTable" role="tab" data-toggle="tab">Tuesday</a></li>
+        <li role="presentation"><a href="#wednesdayTable" aria-controls="wednesdayTable" role="tab" data-toggle="tab">Wednesday</a></li>
+        <li role="presentation"><a href="#thursdayTable" aria-controls="thursdayTable" role="tab" data-toggle="tab">Thursday</a></li>
+        <li role="presentation"><a href="#fridayTable" aria-controls="fridayTable" role="tab" data-toggle="tab">Friday</a></li>
+        <li role="presentation"><a href="#saturdayTable" aria-controls="saturdayTable" role="tab" data-toggle="tab">Saturday</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content" style="padding-top:5px;">
+        <div role="tabpanel" class="tab-pane fade in active" id="weekTable">
+            <table class="table">
+                <tr>
+                    <th>Day</th>
+                    <th>Traffic</th>
+                    <th title="Percent of Daily Traffic">% Traffic</th>
+                    <th title="Transactions">Trans</th>
+                    <th title="Conversion Ratio">Conv Ratio</th>
+                    <th title="Sales">Sales</th>
+                    <th title="Average Transaction">Avg Trans</th>
+                    <th title="Actual Labor Hours">Actl Hrs</th>
+                    <th title="Shopper To Associate Ratio">STAR</th>
+                </tr>
+
+                @for (int i = 0; i < 7; i++)
+                {
+                    <tr>
+                        <td>@Model.StartTime.Add(new TimeSpan(Model.TimeIncrement.Ticks * i)).DayOfWeek</td>
+                        <td>@Model.TrafficTY[i].ToString("0.##")</td>
+                        <td>@Model.TrafficPercent[i].ToString("0.##%")</td>
+                        <td>@Model.Transactions[i].ToString("0.##")</td>
+                        <td>@Model.ConversionPercent[i].ToString("0.##%")</td>
+                        <td>@Model.Sales[i].ToString("$0.00")</td>
+                        <td>@Model.AvgTransactions[i].ToString("$0.00")</td>
+                        <td>@Model.ActualHours[i].ToString("0.##")</td>
+                        <td>@Model.TPLH[i].ToString("0.##")</td>
+                    </tr>
+                }
+                <tr>
+                    <th>Total</th>
+                    <th>#,###</th>
+                    <th>##%</th>
+                    <th>###</th>
+                    <th>##%</th>
+                    <th>$###,###</th>
+                    <th>$###</th>
+                    <th>###</th>
+                    <th>#</th>
+                </tr>
+            </table>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="sundayTable">
+            <div>
+                @using (Ajax.BeginForm("DayTable", "TrafficAnalyzer", null , new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "sundayTableTarget",  }, new { @class = "dayTableForm", @id="sundayTableForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input name="storeId" type="hidden" value="@Model.InputStoreId">
+                    <input name="date" type="hidden" value="@Model.InputDate">
+                    <input name="star" type="hidden" value="@Model.InputSTAR">
+                }
             </div>
-            <div class="panel-body">
-                <div class="clearfix">
-                    <table class="table table-hover table-condensed" style="border:1px solid #afcee9">
-                        <thead>
-                            <tr style="background-color:#afcee9">
-                                <th>Day</th>
-                                <th>Traffic</th>
-                                <th title="Transactions">Trans*</th>
-                                <th>Sales</th>
-                                <th title="Actual Labor Hours">Act Hrs*</th>
-                                <th title="Conversion Ratio">Conv Ratio*</th>
-                                <th title="Average Transactions">Avg Trans*</th>
-                                <th title="Shopper To Associate Ratio">STAR*</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Sun</td>
-                                <td>3,331</td>
-                                <td>689</td>
-                                <td>$111,271</td>
-                                <td>240</td>
-                                <td>20.7%</td>
-                                <td>$161</td>
-                                <td>14</td>
-                            </tr>
-                            <tr>
-                                <td>Mon</td>
-                                <td>2,776</td>
-                                <td>497</td>
-                                <td>$82,214</td>
-                                <td>214</td>
-                                <td>17.9%</td>
-                                <td>$165</td>
-                                <td>13</td>
-                            </tr>
-                            <tr>
-                                <td>Tue</td>
-                                <td>2,456</td>
-                                <td>398</td>
-                                <td>$63,774</td>
-                                <td>192</td>
-                                <td>16.2%</td>
-                                <td>$160</td>
-                                <td>13</td>
-                            </tr>
-                            <tr>
-                                <td>Wed</td>
-                                <td>2,490</td>
-                                <td>414</td>
-                                <td>$67,371</td>
-                                <td>196</td>
-                                <td>16.6%</td>
-                                <td>$163</td>
-                                <td>13</td>
-                            </tr>
-                            <tr>
-                                <td>Thu</td>
-                                <td>2,479</td>
-                                <td>426</td>
-                                <td>$67,371</td>
-                                <td>196</td>
-                                <td>16.6%</td>
-                                <td>$163</td>
-                                <td>13</td>
-                            </tr>
-                            <tr>
-                                <td>Fri</td>
-                                <td>2,752</td>
-                                <td>511</td>
-                                <td>$67,371</td>
-                                <td>196</td>
-                                <td>16.6%</td>
-                                <td>$163</td>
-                                <td>13</td>
-                            </tr>
-                            <tr>
-                                <td>Sat</td>
-                                <td>3,384</td>
-                                <td>696</td>
-                                <td>$67,371</td>
-                                <td>196</td>
-                                <td>16.6%</td>
-                                <td>$163</td>
-                                <td>13</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr style="background-color:#afcee9">
-                                <th>Total</th>
-                                <th>19,668</th>
-                                <th>3,631</th>
-                                <th>$592,188</th>
-                                <th>1,490</th>
-                                <th>18.5%</th>
-                                <th>$163</th>
-                                <th>13</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
+            <div class="partialContentsLoadDayTable col-lg-12" id="sundayTableTarget">
+                <img src="~/img/indicator.white.gif" /> Loading Sunday Data...
             </div>
         </div>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3>Rankings</h3>
+        <div role="tabpanel" class="tab-pane fade" id="mondayTable">
+            <div>
+                @using (Ajax.BeginForm("DayTable", "TrafficAnalyzer", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "mondayTableTarget", }, new { @class = "dayTableForm", @id = "mondayTableForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input name="storeId" type="hidden" value="@Model.InputStoreId">
+                    <input name="date" type="hidden" value="@Model.InputDate.AddDays(1)">
+                    <input name="star" type="hidden" value="@Model.InputSTAR">
+                }
             </div>
-            <div class="panel-body">
-                <div class="clearfix">
-                    <table class="table table-hover table-condensed" style="border:1px solid #afcee9">
-                        <thead>
-                            <tr style="background-color:#afcee9">
-                                <th>Day</th>
-                                <th>Traffic</th>
-                                <th title="Transactions">Trns*</th>
-                                <th>Sales</th>
-                                <th title="Actual Labor Hours">Actl Hrs*</th>
-                                <th title="Conversion Ratio">Conv*</th>
-                                <th title="Average Transactions">Avg Trns*</th>
-                                <th title="Shopper To Associate Ratio">STAR*</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Sun</td>
-                                <td>2</td>
-                                <td>2</td>
-                                <td>2</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>5</td>
-                                <td>6</td>
-                            </tr>
-                            <tr>
-                                <td>Mon</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>4</td>
-                                <td>4</td>
-                                <td>4</td>
-                                <td>2</td>
-                                <td>4</td>
-                            </tr>
-                            <tr>
-                                <td>Tue</td>
-                                <td>7</td>
-                                <td>7</td>
-                                <td>7</td>
-                                <td>6</td>
-                                <td>7</td>
-                                <td>6</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>Wed</td>
-                                <td>5</td>
-                                <td>6</td>
-                                <td>6</td>
-                                <td>5</td>
-                                <td>6</td>
-                                <td>4</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <th>Thu</th>
-                                <td>6</td>
-                                <td>5</td>
-                                <td>5</td>
-                                <td>7</td>
-                                <td>5</td>
-                                <td>3</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <th>Fri</th>
-                                <td>4</td>
-                                <td>3</td>
-                                <td>3</td>
-                                <td>3</td>
-                                <td>3</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <th>Sat</th>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>2</td>
-                                <td>7</td>
-                                <td>7</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="partialContentsLoadDayTable col-lg-12" id="mondayTableTarget">
+                <img src="~/img/indicator.white.gif" /> Loading Monday Data...
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="tuesdayTable">
+            <div>
+                @using (Ajax.BeginForm("DayTable", "TrafficAnalyzer", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "tuesdayTableTarget", }, new { @class = "dayTableForm", @id = "tuesdayTableForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input name="storeId" type="hidden" value="@Model.InputStoreId">
+                    <input name="date" type="hidden" value="@Model.InputDate.AddDays(2)">
+                    <input name="star" type="hidden" value="@Model.InputSTAR">
+                }
+            </div>
+            <div class="partialContentsLoadDayTable col-lg-12" id="tuesdayTableTarget">
+                <img src="~/img/indicator.white.gif" /> Loading Tuesday Data...
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="wednesdayTable">
+            <div>
+                @using (Ajax.BeginForm("DayTable", "TrafficAnalyzer", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "wednesdayTableTarget", }, new { @class = "dayTableForm", @id = "wednesdayTableForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input name="storeId" type="hidden" value="@Model.InputStoreId">
+                    <input name="date" type="hidden" value="@Model.InputDate.AddDays(3)">
+                    <input name="star" type="hidden" value="@Model.InputSTAR">
+                }
+            </div>
+            <div class="partialContentsLoadDayTable col-lg-12" id="wednesdayTableTarget">
+                <img src="~/img/indicator.white.gif" /> Loading Wednessday Data...
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="thursdayTable">
+            <div>
+                @using (Ajax.BeginForm("DayTable", "TrafficAnalyzer", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "thursdayTableTarget", }, new { @class = "dayTableForm", @id = "thursdayTableForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input name="storeId" type="hidden" value="@Model.InputStoreId">
+                    <input name="date" type="hidden" value="@Model.InputDate.AddDays(4)">
+                    <input name="star" type="hidden" value="@Model.InputSTAR">
+                }
+            </div>
+            <div class="partialContentsLoadDayTable col-lg-12" id="thursdayTableTarget">
+                <img src="~/img/indicator.white.gif" /> Loading Thursday Data...
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="fridayTable">
+            <div>
+                @using (Ajax.BeginForm("DayTable", "TrafficAnalyzer", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "fridayTableTarget", }, new { @class = "dayTableForm", @id = "fridayTableForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input name="storeId" type="hidden" value="@Model.InputStoreId">
+                    <input name="date" type="hidden" value="@Model.InputDate.AddDays(5)">
+                    <input name="star" type="hidden" value="@Model.InputSTAR">
+                }
+            </div>
+            <div class="partialContentsLoadDayTable col-lg-12" id="fridayTableTarget">
+                <img src="~/img/indicator.white.gif" /> Loading Friday Data...
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="saturdayTable">
+            <div>
+                @using (Ajax.BeginForm("DayTable", "TrafficAnalyzer", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "saturdayTableTarget", }, new { @class = "dayTableForm", @id = "saturdayTableForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input name="storeId" type="hidden" value="@Model.InputStoreId">
+                    <input name="date" type="hidden" value="@Model.InputDate.AddDays(6)">
+                    <input name="star" type="hidden" value="@Model.InputSTAR">
+                }
+            </div>
+            <div class="partialContentsLoadDayTable col-lg-12" id="saturdayTableTarget">
+                <img src="~/img/indicator.white.gif" /> Loading Saturday Data...
             </div>
         </div>
     </div>
+
 </div>
 
+<script type="text/javascript" language=javascript>
+    $(document).ready(function () {
+        $(".dayTableForm").each(function () {
+            $(this).submit();
+        });
+    });
+</script>
