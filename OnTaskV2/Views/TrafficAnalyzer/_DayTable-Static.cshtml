@@ -37,14 +37,22 @@
     }
     <tr>
         <th>Total</th>
-        <th>2,708</th>
-        <th></th>
-        <th>488</th>
-        <th>18.0%</th>
-        <th>214</th>
-        <th>13</th>
-        <th>208</th>
-        <th>-6</th>
+        <th>@Model.TrafficTY.Sum().ToString("#,##0")</th>
+        <th>@Model.TrafficPercent.Sum().ToString("0.##%")</th>
+        <th>@Model.Transactions.Sum().ToString("0.##")</th>
+        <th>@if(Model.TrafficTY.Sum() != 0)
+            {
+                <span>@((Model.Transactions.Sum() / Model.TrafficTY.Sum()).ToString("0.##%"))</span>
+            } 
+        </th>
+        <th>@Model.ActualHours.Sum().ToString("0.##")</th>
+        <th>@if(Model.ActualHours.Sum() != 0)
+            {
+                <span>@((Model.TrafficTY.Sum() / Model.ActualHours.Sum()).ToString("0.##"))</span>
+            }
+        </th>
+        <th>@Model.RecommendHours.Sum().ToString("0.##")</th>
+        <th>@Model.PlusMinusHours.Sum().ToString("0.##")</th>
     </tr>
 </table>
 
