@@ -4,56 +4,62 @@
     ViewBag.Title = "Labor Optimization Table";
 }
 
-<table class="table">
-    <tr>
-        <th>Time</th>
-        <th>Traffic</th>
-        <th title="Percent of Daily Traffic">% Traffic</th>
-        <th title="Transactions">Trans</th>
-        <th title="Conversion Ratio">Conv Ratio</th>
-        <th title="Actual Labor Hours">Actl Hrs</th>
-        <th title="Shopper To Associate Ratio">STAR</th>
-        <th title="Recommended Labor Hours">Recmd Hrs</th>
-        <th title="Increase/Reduce Hours">+/- Hours</th>
-    </tr>
-
-    @for (int i = 0; i < Model.ActualHours.Count(); i++)
-    {
-        if (Model.TrafficTY[i] != 0)
+<table class="table" id="dayTable@(Model.InputDate.DayOfWeek)">
+    <thead>
+        <tr>
+            <th>Time</th>
+            <th>Traffic</th>
+            <th title="Percent of Daily Traffic">% Traffic</th>
+            <th title="Transactions">Trans</th>
+            <th title="Conversion Ratio">Conv Ratio</th>
+            <th title="Actual Labor Hours">Actl Hrs</th>
+            <th title="Shopper To Associate Ratio">STAR</th>
+            <th title="Recommended Labor Hours">Recmd Hrs</th>
+            <th title="Increase/Reduce Hours">+/- Hours</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Total</th>
+            <th>@Model.TrafficTY.Sum().ToString("#,##0")</th>
+            <th>@Model.TrafficPercent.Sum().ToString("0.##%")</th>
+            <th>@Model.Transactions.Sum().ToString("0.##")</th>
+            <th>
+                @if (Model.TrafficTY.Sum() != 0)
+                {
+                    <span>@((Model.Transactions.Sum() / Model.TrafficTY.Sum()).ToString("0.##%"))</span>
+                }
+            </th>
+            <th>@Model.ActualHours.Sum().ToString("0.##")</th>
+            <th>
+                @if (Model.ActualHours.Sum() != 0)
+                {
+                    <span>@((Model.TrafficTY.Sum() / Model.ActualHours.Sum()).ToString("0.##"))</span>
+                }
+            </th>
+            <th>@Model.RecommendHours.Sum().ToString("0.##")</th>
+            <th>@Model.PlusMinusHours.Sum().ToString("0.##")</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @for (int i = 0; i < Model.ActualHours.Count(); i++)
         {
-            <tr>
-                <td>@Model.StartTime.Add(new TimeSpan(Model.TimeIncrement.Ticks * i)).ToShortTimeString()</td>
-                <td>@Model.TrafficTY[i].ToString("0.##")</td>
-                <td>@Model.TrafficPercent[i].ToString("0.##%")</td>
-                <td>@Model.Transactions[i].ToString("0.##")</td>
-                <td>@Model.ConversionPercent[i].ToString("0.##%")</td>
-                <td>@Model.ActualHours[i].ToString("0.##")</td>
-                <td>@Model.TPLH[i].ToString("0.##")</td>
-                <td>@Model.RecommendHours[i].ToString("0.##")</td>
-                <td>@Model.PlusMinusHours[i].ToString("0.##")</td>
-            </tr>
-        }
-
-    }
-    <tr>
-        <th>Total</th>
-        <th>@Model.TrafficTY.Sum().ToString("#,##0")</th>
-        <th>@Model.TrafficPercent.Sum().ToString("0.##%")</th>
-        <th>@Model.Transactions.Sum().ToString("0.##")</th>
-        <th>@if(Model.TrafficTY.Sum() != 0)
+            if (Model.TrafficTY[i] != 0)
             {
-                <span>@((Model.Transactions.Sum() / Model.TrafficTY.Sum()).ToString("0.##%"))</span>
-            } 
-        </th>
-        <th>@Model.ActualHours.Sum().ToString("0.##")</th>
-        <th>@if(Model.ActualHours.Sum() != 0)
-            {
-                <span>@((Model.TrafficTY.Sum() / Model.ActualHours.Sum()).ToString("0.##"))</span>
+                <tr>
+                    <td>@Model.StartTime.Add(new TimeSpan(Model.TimeIncrement.Ticks * i)).ToShortTimeString()</td>
+                    <td>@Model.TrafficTY[i].ToString("0.##")</td>
+                    <td>@Model.TrafficPercent[i].ToString("0.##%")</td>
+                    <td>@Model.Transactions[i].ToString("0.##")</td>
+                    <td>@Model.ConversionPercent[i].ToString("0.##%")</td>
+                    <td>@Model.ActualHours[i].ToString("0.##")</td>
+                    <td>@Model.TPLH[i].ToString("0.##")</td>
+                    <td>@Model.RecommendHours[i].ToString("0.##")</td>
+                    <td>@Model.PlusMinusHours[i].ToString("0.##")</td>
+                </tr>
             }
-        </th>
-        <th>@Model.RecommendHours.Sum().ToString("0.##")</th>
-        <th>@Model.PlusMinusHours.Sum().ToString("0.##")</th>
-    </tr>
+        }
+    </tbody>
 </table>
 
 <dl class="dl-horizontal">
@@ -72,3 +78,15 @@
     <dt>@Html.DisplayNameFor(model => model.TargetSTAR)</dt>
     <dd>@Html.DisplayFor(model => model.TargetSTAR)</dd>
 </dl>
+
+<script type="text/javascript" language=javascript>
+    $(document).ready(function () {
+
+         $.fn.dataTable.moment('h:mm A');
+
+         $('#dayTable@(Model.InputDate.DayOfWeek)').dataTable({
+             "paging": false,
+             "searching": false,
+         });
+     });
+</script>

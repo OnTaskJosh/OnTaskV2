@@ -30,6 +30,14 @@ namespace OnTaskV2
 
             bundles.Add(new StyleBundle("~/bundles/unobtrusiveajax").Include(
                       "~/Scripts/jquery.unobtrusive-ajax.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/datatables").Include(
+                      "~/Content/dataTables.bootstrap.min.css"));
+            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+                      "~/Scripts/jquery.dataTables.min.js",
+                      "~/Scripts/dataTables.bootstrap.min.js",
+                      "~/Scripts/moment-2.8.4.min.js",
+                      "~/Scripts/datetime-moment.js"));
         }
     }
 }
