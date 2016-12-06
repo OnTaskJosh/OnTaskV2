@@ -21,7 +21,7 @@
     <!-- Tab panes -->
     <div class="tab-content" style="padding-top:5px;">
         <div role="tabpanel" class="tab-pane fade in active" id="weekTableDiv">
-            <table class="table" id="weekTable">
+            <table class="table table-hover trafficAnalyzerWeekTable" id="weekTable">
                 <thead>
                     <tr>
                         <th>Day</th>
@@ -295,6 +295,17 @@
          $('#weekTable').dataTable({
              "paging": false,
              "searching": false,
+             "info": false,
+             "columns": [
+                { className: "dt-left" },
+                { className: "dt-right" },
+                { className: "dt-right" },
+                { className: "dt-right" },
+                { className: "dt-right" },
+                { className: "dt-right" },
+                { className: "dt-right" },
+                { className: "dt-right" },
+                { className: "dt-right" }, ]
          });
      });
 </script>

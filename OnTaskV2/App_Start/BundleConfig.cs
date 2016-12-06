@@ -32,7 +32,9 @@ namespace OnTaskV2
                       "~/Scripts/jquery.unobtrusive-ajax.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/datatables").Include(
-                      "~/Content/dataTables.bootstrap.min.css"));
+                      "~/Content/dataTables.bootstrap.min.css",
+                      "~/Content/jquery.dataTables.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
                       "~/Scripts/jquery.dataTables.min.js",
                       "~/Scripts/dataTables.bootstrap.min.js",

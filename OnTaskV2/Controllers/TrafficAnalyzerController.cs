@@ -151,6 +151,7 @@ namespace OnTaskV2.Controllers
                 PlusMinusHours = new decimal[timeInc],
                 StartTime = Convert.ToDateTime(store.Attributes.Where(a=>a.Name == openTimeAttr).FirstOrDefault()?.Value),
                 EndTime = Convert.ToDateTime(store.Attributes.Where(a => a.Name == closeTimeAttr).FirstOrDefault()?.Value),
+                IsPeakPeriod = new bool[timeInc],
             };
             table.TimeIncrement = new TimeSpan((table.EndTime - table.StartTime).Ticks / timeInc);
             try
@@ -161,7 +162,9 @@ namespace OnTaskV2.Controllers
             {
             }
 
-            table.BudgetHours = _historicDataService.GetDriverVolumeSumByWeek("LaborHours", store.Number, date) * (_historicDataService.GetDriverVolumeSumByDay("Traffic", store.Number, date) / _historicDataService.GetDriverVolumeSumByWeek("Traffic", store.Number, date)); // (LaborHours) * (DailyTrafficPercentOfWeek)
+            var totalWeekTraffic = _historicDataService.GetDriverVolumeSumByWeek("Traffic", store.Number, date);
+            var totalWeekLaborHours = _historicDataService.GetDriverVolumeSumByWeek("LaborHours", store.Number, date);
+            table.BudgetHours = totalWeekLaborHours * (_historicDataService.GetDriverVolumeSumByDay("Traffic", store.Number, date) / totalWeekTraffic); // (LaborHours) * (DailyTrafficPercentOfWeek)
             //table.NonSellHours =
 
             table.SellingHours = table.BudgetHours - table.BaseHours - table.NonSellHours;
@@ -218,8 +221,17 @@ namespace OnTaskV2.Controllers
                     table.TPLH[i] = 0.0M;
                 }
                 table.PlusMinusHours[i] = table.RecommendHours[i] - table.ActualHours[i];
+                if (timeInc == 96)
+                {
+                     //15-min increment greater than 2.25% of total daily traffic
+                }
+                else if (timeInc == 24)
+                {
+                    table.IsPeakPeriod[i] = table.TrafficPercent[i] >= .09M ? true : false; //hourly increment greater than 9% of total daily traffic
+                }
+                
             }
-
+            
             table.TargetSTAR = Convert.ToDecimal(star);
             return PartialView("_DayTable-Static",table);
         }
