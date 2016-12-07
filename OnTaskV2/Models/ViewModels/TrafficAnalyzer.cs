@@ -63,6 +63,7 @@ namespace OnTaskV2.Models.ViewModels
         public DateTime EndTime { get; set; }
         [DisplayFormat(DataFormatString = "{0:h:mm}", ApplyFormatInEditMode = true)]
         public TimeSpan TimeIncrement { get; set; }
+        public string[] TimePeriod { get; set; }
         public bool[] IsPeakPeriod { get; set; }
     }
 }

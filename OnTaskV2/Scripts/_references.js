@@ -1,5 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="bootstrap.js" />
+/// <reference path="chart.min.js" />
 /// <reference path="datatables.bootstrap.min.js" />
 /// <reference path="datetime-moment.js" />
 /// <reference path="jquery.datatables.min.js" />

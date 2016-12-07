@@ -62,6 +62,7 @@ namespace OnTaskV2.Controllers
                 EndTime = sundayDate.AddDays(timeInc),
                 Sales = new decimal[timeInc],
                 AvgTransactions = new decimal[timeInc],
+                TimePeriod = new string[timeInc],
             };
             table.TimeIncrement = new TimeSpan((table.EndTime - table.StartTime).Ticks / timeInc);
 
@@ -74,6 +75,7 @@ namespace OnTaskV2.Controllers
             var totalTraffic = table.TrafficTY.Sum();
             for (int i = 0; i < timeInc; i++)
             {
+                table.TimePeriod[i] = table.StartTime.Add(new TimeSpan(table.TimeIncrement.Ticks * i)).ToShortTimeString();
                 if (table.Transactions[i] > 0)
                 {
                     table.ConversionPercent[i] = table.Transactions[i] / table.TrafficTY[i];
@@ -152,6 +154,7 @@ namespace OnTaskV2.Controllers
                 StartTime = Convert.ToDateTime(store.Attributes.Where(a=>a.Name == openTimeAttr).FirstOrDefault()?.Value),
                 EndTime = Convert.ToDateTime(store.Attributes.Where(a => a.Name == closeTimeAttr).FirstOrDefault()?.Value),
                 IsPeakPeriod = new bool[timeInc],
+                TimePeriod = new string[timeInc],
             };
             table.TimeIncrement = new TimeSpan((table.EndTime - table.StartTime).Ticks / timeInc);
             try
@@ -187,7 +190,8 @@ namespace OnTaskV2.Controllers
             var totalTraffic = table.TrafficTY.Sum();
             for(int i=0; i<timeInc;i++)
             {
-                if(table.Transactions[i] > 0)
+                table.TimePeriod[i] = table.StartTime.Add(new TimeSpan(table.TimeIncrement.Ticks * i)).ToShortTimeString();
+                if (table.Transactions[i] > 0)
                 {
                     table.ConversionPercent[i] = table.Transactions[i] / table.TrafficTY[i];
                 }
@@ -223,11 +227,13 @@ namespace OnTaskV2.Controllers
                 table.PlusMinusHours[i] = table.RecommendHours[i] - table.ActualHours[i];
                 if (timeInc == 96)
                 {
-                     //15-min increment greater than 2.25% of total daily traffic
+                    //TODO: replace percent with store attribute
+                    table.IsPeakPeriod[i] = table.TrafficPercent[i] >= .0225M ? true : false; //15-min increment greater than 2.25% of total daily traffic
                 }
                 else if (timeInc == 24)
                 {
-                    table.IsPeakPeriod[i] = table.TrafficPercent[i] >= .09M ? true : false; //hourly increment greater than 9% of total daily traffic
+                    //TODO: replace percent with store attribute
+                    table.IsPeakPeriod[i] = table.TrafficPercent[i] >= .09M ? true : false; //hourly increment greater than 9% of total daily traffic 
                 }
                 
             }
