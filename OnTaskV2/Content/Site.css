@@ -23,3 +23,11 @@ textarea {
     max-width: 280px;
 }
 
+.navbar-brand{
+    background: url(/img/OnTaskLogoBk30.gif) no-repeat left center;
+     text-indent: -9999px;
+     height:40px;
+     width:100px;
+     white-space: nowrap; 
+}
+
