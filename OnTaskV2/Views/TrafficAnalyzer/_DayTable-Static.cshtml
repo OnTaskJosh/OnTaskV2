@@ -83,6 +83,10 @@
 
 <canvas id="dayChart@(Model.InputDate.DayOfWeek)" width="800" height="400"></canvas>
 
+<br>
+
+<canvas id="dayScatterChart@(Model.InputDate.DayOfWeek)" width="800" height="400"></canvas>
+
 <script type="text/javascript" language=javascript>
     $(document).ready(function () {
 
@@ -119,7 +123,6 @@
         {
             @:convArray@(Model.InputDate.DayOfWeek).push("@((c*100).ToString("0.##"))");
         }
-        console.log(convArray@(Model.InputDate.DayOfWeek));
         var starArray@(Model.InputDate.DayOfWeek) = [];
         @foreach (var s in Model.TPLH)
         {
@@ -208,17 +211,65 @@
                         stacked: false,
                     }],
                     yAxes: [{
+                        position: 'left',
                         stacked: false,
                         ticks: {
                             beginAtZero: true,
                         }
                     }, {
                         id: "bar-y-axis",
+                        position: 'right',
                         stacked: false,
                         ticks: {
                             beginAtZero: true,
                         },
                         type: 'linear'
+                    }]
+                }
+            }
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var scatterArray@(Model.InputDate.DayOfWeek) = [
+            @for(int i = 0; i<Model.TimePeriod.Count();i++)
+            {
+                @:{x: @(Model.TPLH[i].ToString("0.##")) , y: @((Model.ConversionPercent[i] * 100).ToString("0.##")), r: 10},
+            }
+        ];
+
+        var myScatterChart@(Model.InputDate.DayOfWeek) = new Chart($("#dayScatterChart@(Model.InputDate.DayOfWeek)"), {
+            type: 'bubble',
+            data: {
+                datasets: [{
+                    label: 'Scatter Dataset',
+                    data: scatterArray@(Model.InputDate.DayOfWeek),
+                    backgroundColor:"#FF6384",
+                    hoverBackgroundColor: "#FF6384",
+                }]
+            },
+            options: {
+                elements: {
+                    points: {
+                        borderWidth: 1,
+                        borderColor: 'rgb(0, 0, 0)'
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "STAR",
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Conversion %",
+                        }
                     }]
                 }
             }

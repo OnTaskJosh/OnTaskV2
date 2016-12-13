@@ -63,6 +63,18 @@ namespace OnTaskV2.DAL
             {
                 new StoreAttribute{ID = 1, StoreID = 1, Name = "SundayOpen", Value = "01/01/1900 00:00:00" },
                 new StoreAttribute{ID = 1, StoreID = 1, Name = "SundayClose", Value = "01/02/1900 00:00:00" },
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "MondayOpen", Value = "01/01/1900 00:00:00" },
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "MondayClose", Value = "01/02/1900 00:00:00" },
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "TuesdayOpen", Value = "01/01/1900 00:00:00" },
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "TuesdayClose", Value = "01/02/1900 00:00:00" },
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "WednesdayOpen", Value = "01/01/1900 00:00:00" },
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "WednesdayClose", Value = "01/02/1900 00:00:00" },
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "ThursdayOpen", Value = "01/01/1900 00:00:00" },
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "ThursdayClose", Value = "01/02/1900 00:00:00" },
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "FridayOpen", Value = "01/01/1900 00:00:00" },
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "FridayClose", Value = "01/02/1900 00:00:00" },
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "SaturdayOpen", Value = "01/01/1900 00:00:00" },
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "SaturdayClose", Value = "01/02/1900 00:00:00" },
             };
             storeAttributes.ForEach(s => dbContext.StoreAttributes.Add(s));
             dbContext.SaveChanges();
@@ -261,6 +273,307 @@ namespace OnTaskV2.DAL
                 new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,06,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,15,0,0,DateTimeKind.Local), Quantity = 1 },
                 new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,06,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,30,0,0,DateTimeKind.Local), Quantity = 1 },
                 new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,06,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,45,0,0,DateTimeKind.Local), Quantity = 1 },
+
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity = 3 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity = 11 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity = 17 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity = 23 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity =52 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity = 44 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity = 67 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity = 49 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity = 47 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity = 38 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity = 34 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity = 34 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity = 38 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity = 4 }, //DateTime Kind (2) = Local
+
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity = 0 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity = 0 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity = 0 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity = 10 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity = 6 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity = 10 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity = 3 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity = 6 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity = 5 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity = 4 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity = 6 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity = 5 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity = 0 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity = 0 }, //DateTime Kind (2) = Local
+
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity = 2 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity = 3 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity = 4 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity = 5 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity = 7 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity = 7 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity = 8 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity = 8 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity = 5 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity = 4 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity = 5 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity = 5 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity = 5 }, //DateTime Kind (2) = Local
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,07,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity = 0 }, //DateTime Kind (2) = Local
+
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =   2},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =   8},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity =   22},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity =  35},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity =   52},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity =   41},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity =   55},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity =   41},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity =   30},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity =   37},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity =   29},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity =  20},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =   7},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =   3},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =   0},
+
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity = 0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity = 10},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity = 6},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity = 10},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity =  3},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity =  6},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity =  5},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity = 4},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity = 6},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =  0},
+
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity = 0},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =  2},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =  5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity =  6},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity =  8},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity = 8},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity = 9},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity = 8},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity = 6},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity = 6},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity = 6},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =  3},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,08,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =  0},
+
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity =   2},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =   11},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =   15},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity =   21},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity =  50},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity =   41},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity =   65},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity =   48},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity =   48},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity =   37},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity =   35},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity =   33},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity =  37},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =   4},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =   0},
+
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity = 0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity = 10},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity = 6},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity = 10},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity =  3},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity =  6},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity =  5},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity = 4},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity = 6},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =  0},
+
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity = 2},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =  3},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =  4},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity =  7},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity =  7},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity = 8},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity = 8},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity = 4},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,09,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =  0},
+
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity =   2},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =   11},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =   15},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity =   21},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity =  50},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity =   41},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity =   65},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity =   48},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity =   48},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity =   37},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity =   35},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity =   33},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity =  37},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =   4},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =   0},
+
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity = 0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity = 10},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity = 6},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity = 10},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity =  3},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity =  6},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity =  5},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity = 4},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity = 6},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =  0},
+
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity = 2},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =  3},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =  4},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity =  7},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity =  7},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity = 8},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity = 8},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity = 4},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,10,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =  0},
+
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity =   2},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =   11},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =   15},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity =   21},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity =  50},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity =   41},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity =   65},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity =   48},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity =   48},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity =   37},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity =   35},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity =   33},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity =  37},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =   4},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =   0},
+
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity = 0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity = 10},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity = 6},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity = 10},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity =  3},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity =  6},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity =  5},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity = 4},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity = 6},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =  0},
+
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity = 2},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =  3},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =  4},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity =  7},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity =  7},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity = 8},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity = 8},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity = 4},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity = 5},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,11,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =  0},
+
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity =   4},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =   13},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =   21},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity =   42},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity =  68},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity =   81},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity =   118},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity =   136},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity =   21},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity =   6},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity =   4},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity =   1},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity =  7},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =   6},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Traffic", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =   0},
+
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =   0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =  6},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity = 7},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity = 8},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity = 9},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity = 7},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity =  16},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity =  1},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity = 0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity = 0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity = 0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "Transactions", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =  0},
+
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,8,0,0,0,DateTimeKind.Local), Quantity = 0},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,9,0,0,0,DateTimeKind.Local), Quantity =  7},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,10,0,0,0,DateTimeKind.Local), Quantity =  10},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,11,0,0,0,DateTimeKind.Local), Quantity = 11},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,12,0,0,0,DateTimeKind.Local), Quantity =  11},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,13,0,0,0,DateTimeKind.Local), Quantity =  10},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,14,0,0,0,DateTimeKind.Local), Quantity = 11},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,15,0,0,0,DateTimeKind.Local), Quantity = 10},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,16,0,0,0,DateTimeKind.Local), Quantity = 10},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,17,0,0,0,DateTimeKind.Local), Quantity = 10},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,18,0,0,0,DateTimeKind.Local), Quantity = 10},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,19,0,0,0,DateTimeKind.Local), Quantity = 9},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,20,0,0,0,DateTimeKind.Local), Quantity = 9},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,21,0,0,0,DateTimeKind.Local), Quantity =  8},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,22,0,0,0,DateTimeKind.Local), Quantity =  0},
+                new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =  0},
+
             };
             historicData.ForEach(s => dbContext.HistoricData.Add(s));
             dbContext.SaveChanges();

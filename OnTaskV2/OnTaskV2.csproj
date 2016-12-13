@@ -274,6 +274,7 @@
     <Content Include="Views\TrafficAnalyzer\_DayTable-Static.cshtml" />
     <Content Include="Views\TrafficAnalyzer\_WeekTable-Static.cshtml" />
     <Content Include="Views\TrafficAnalyzer\_TrafficAnalyzerTable.cshtml" />
+    <Content Include="Views\TrafficAnalyzer\_WeekScatterChartStarConv.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -107,6 +107,39 @@ namespace OnTaskV2.BLL
             return volumes;
         }
 
+        public decimal[] GetDriverVolumeForWeekByHour(string driver, int storeNum, DateTime startOfWeekDate)
+        {
+            var volumes = new decimal[24*7];
+            DateTime endOfWeekDate = startOfWeekDate.AddDays(7);
+            var volumeData = db.HistoricData.Where(d => d.StoreNumber == storeNum && d.DriverName == driver && DbFunctions.TruncateTime(d.Date) >= DbFunctions.TruncateTime(startOfWeekDate.Date) && DbFunctions.TruncateTime(d.Date) <= DbFunctions.TruncateTime(endOfWeekDate.Date));
+            DateTime dayInc = new DateTime();
+            int hourInc = 0;
+            List<HistoricData> incVolData = new List<HistoricData>();
+            for (int i = 0; i < 7; i++) //loop through day increments.
+            {
+                dayInc = startOfWeekDate.AddDays(i);
+                for (int j = 0; j < 24; j++) //loop through 15 minute increments.
+                {
+                    hourInc = j;
+                    try
+                    {
+                        volumes[(i*j)] = 0;
+                        incVolData = volumeData.Where(d => DbFunctions.CreateTime(d.Time.Value.Hour, 0, 0) == DbFunctions.CreateTime(hourInc, 0, 0) && DbFunctions.TruncateTime(d.Date) == DbFunctions.TruncateTime(dayInc)).ToList(); //get specific 15-minute increment
+                        foreach (var dataItem in incVolData)
+                        {
+                            volumes[(i*j)] += dataItem.Quantity;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("{0} Exception caught.", e);
+                        volumes[(i*j)] = 0; //if no data, set to 0
+                    }
+                }
+            }
+            return volumes;
+        }
+
         public decimal GetDriverVolumeSumByDay(string driver, int storeNum, DateTime date)
         {
             decimal volumeTotal = 0.0M;
@@ -148,6 +181,7 @@ namespace OnTaskV2.BLL
         decimal[] GetDriverVolumeForDayBy15min(string driver, int storeNum, DateTime date);
         decimal[] GetDriverVolumeForDayByHour(string driver, int storeNum, DateTime date);
         decimal[] GetDriverVolumeForWeekByDay(string driver, int storeNum, DateTime date);
+        decimal[] GetDriverVolumeForWeekByHour(string driver, int storeNum, DateTime date);
         decimal GetDriverVolumeSumByDay(string driver, int storeNum, DateTime date);
         decimal GetDriverVolumeSumByWeek(string driver, int storeNum, DateTime date);
     }

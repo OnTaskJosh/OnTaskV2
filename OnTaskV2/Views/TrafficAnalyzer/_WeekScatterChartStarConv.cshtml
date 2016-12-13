@@ -1,0 +1,49 @@
+﻿@model OnTaskV2.Models.ViewModels.TA_Table
+
+<canvas id="weekScatterChart" width="800" height="400"></canvas>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var weekScatterArray = [
+            @for(int i = 0; i<Model.TimePeriod.Count();i++)
+            {
+                @:{x: @(Model.TPLH[i].ToString("0.##")) , y: @((Model.ConversionPercent[i] * 100).ToString("0.##")), r: 10},
+            }
+        ];
+
+        var myWeekScatterChart = new Chart($("#weekScatterChart"), {
+            type: 'bubble',
+            data: {
+                datasets: [{
+                    label: 'Scatter Dataset',
+                    data: weekScatterArray,
+                    backgroundColor:"#FF6384",
+                    hoverBackgroundColor: "#FF6384",
+                }]
+            },
+            options: {
+                elements: {
+                    points: {
+                        borderWidth: 1,
+                        borderColor: 'rgb(0, 0, 0)'
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "STAR",
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Conversion %",
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>

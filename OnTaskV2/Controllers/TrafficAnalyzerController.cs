@@ -241,5 +241,95 @@ namespace OnTaskV2.Controllers
             table.TargetSTAR = Convert.ToDecimal(star);
             return PartialView("_DayTable-Static",table);
         }
+
+        [HttpPost]
+        public ActionResult WeekScatterChart_Star_Conv(int storeId, DateTime date, decimal? star)
+        {
+            var store = db.Stores.Find(storeId);
+            var sundayDate = date.AddDays(DayOfWeek.Sunday - date.DayOfWeek);
+            var timeInc = 24*7; // 24 hrs, 7 days
+            var table = new TA_Table()
+            {
+                InputStoreId = storeId,
+                InputDate = date,
+                InputSTAR = star,
+                BaseHours = 0.0M,
+                BudgetHours = 0.0M,
+                NonSellHours = 0.0M,
+                SellingHours = 0.0M,
+                ActualHours = new decimal[timeInc],
+                RecommendHours = new decimal[timeInc],
+                AdjustHours = new decimal[timeInc],
+                ConversionPercent = new decimal[timeInc],
+                TrafficTY = new decimal[timeInc],
+                TrafficLY = new decimal[timeInc],
+                Transactions = new decimal[timeInc],
+                TrafficPercent = new decimal[timeInc],
+                TPLH = new decimal[timeInc],
+                PlusMinusHours = new decimal[timeInc],
+                StartTime = sundayDate,
+                EndTime = sundayDate.AddDays(timeInc),
+                Sales = new decimal[timeInc],
+                AvgTransactions = new decimal[timeInc],
+                TimePeriod = new string[timeInc],
+            };
+            table.TimeIncrement = new TimeSpan((table.EndTime - table.StartTime).Ticks / timeInc);
+
+            table.ActualHours = _historicDataService.GetDriverVolumeForWeekByHour("LaborHours", store.Number, sundayDate);
+            table.TrafficLY = _historicDataService.GetDriverVolumeForWeekByHour("Traffic", store.Number, date.AddYears(-1).AddDays(DateHelper.AddDayOffsetToLY(sundayDate))); //adding days keeps on the same day of week
+            table.TrafficTY = _historicDataService.GetDriverVolumeForWeekByHour("Traffic", store.Number, sundayDate);
+            table.Transactions = _historicDataService.GetDriverVolumeForWeekByHour("Transactions", store.Number, sundayDate);
+            table.Sales = _historicDataService.GetDriverVolumeForWeekByHour("Sales", store.Number, sundayDate);
+
+            var totalTraffic = table.TrafficTY.Sum();
+            for (int i = 0; i < timeInc; i++)
+            {
+                table.TimePeriod[i] = table.StartTime.Add(new TimeSpan(table.TimeIncrement.Ticks * i)).ToShortTimeString();
+                if (table.Transactions[i] > 0)
+                {
+                    table.ConversionPercent[i] = table.Transactions[i] / table.TrafficTY[i];
+                }
+                else
+                {
+                    table.ConversionPercent[i] = 0.0M;
+                }
+                if (totalTraffic > 0)
+                {
+                    table.TrafficPercent[i] = table.TrafficTY[i] / totalTraffic;
+                }
+                else
+                {
+                    table.TrafficPercent[i] = 0.0M;
+                }
+                if (star != null && star > 0) //if star is null, set to 0
+                {
+                    table.RecommendHours[i] = (table.TrafficTY[i] / Convert.ToDecimal(star));
+                }
+                else
+                {
+                    table.RecommendHours[i] = 0.0M;
+                }
+                table.AdjustHours[i] = table.RecommendHours[i]; //default set adjusted hours to recommended hours
+                if (table.ActualHours[i] > 0)
+                {
+                    table.TPLH[i] = table.TrafficTY[i] / table.ActualHours[i];
+                }
+                else
+                {
+                    table.TPLH[i] = 0.0M;
+                }
+                table.PlusMinusHours[i] = table.ActualHours[i] - table.RecommendHours[i];
+                if (table.Sales[i] > 0)
+                {
+                    table.AvgTransactions[i] = table.Sales[i] / table.Transactions[i];
+                }
+                else
+                {
+                    table.AvgTransactions[i] = 0.0M;
+                }
+            }
+            table.TargetSTAR = Convert.ToDecimal(star);
+            return PartialView("_WeekScatterChartStarConv", table);
+        }
     }
 }
