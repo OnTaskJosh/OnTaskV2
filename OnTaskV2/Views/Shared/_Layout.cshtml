@@ -4,10 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - OnTaskV2</title>
+
+    @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/datatables")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+
 
 </head>
 <body>
@@ -24,9 +25,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Design
-                            <span class="caret"></span>
+                        
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Design <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Labor Standards</a></li>
@@ -87,7 +88,10 @@
     @Scripts.Render("~/bundles/unobtrusiveajax")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/datatables")
-    
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+
+
