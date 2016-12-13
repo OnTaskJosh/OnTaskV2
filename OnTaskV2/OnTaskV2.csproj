@@ -204,6 +204,12 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\indicator.white.gif" />
+    <Content Include="img\OnTaskLogoBk100.gif" />
+    <Content Include="img\OnTaskLogoBk30.gif" />
+    <Content Include="img\OnTaskLogoBk40.gif" />
+    <Content Include="img\OnTaskLogoBk50.gif" />
+    <Content Include="img\OnTaskLogoBk60.gif" />
+    <Content Include="img\OnTaskLogoBk70.gif" />
     <Content Include="img\sort_asc.png" />
     <Content Include="img\sort_asc_disabled.png" />
     <Content Include="img\sort_both.png" />
