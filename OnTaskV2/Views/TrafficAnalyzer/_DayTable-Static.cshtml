@@ -46,7 +46,7 @@
         {
             if (Model.TrafficTY[i] != 0)
             {
-                <tr class="@(Model.IsPeakPeriod[i] ? "warning": "")">
+                <tr class="@(Model.IsPeakPeriod[i] ? "warning" : "")">
                     <td>@Model.StartTime.Add(new TimeSpan(Model.TimeIncrement.Ticks * i)).ToShortTimeString()</td>
                     <td>@Model.TrafficTY[i].ToString("0.##")</td>
                     <td>@Model.TrafficPercent[i].ToString("0.##%")</td>
@@ -117,6 +117,8 @@
 <!--Initialize line/ bar chart with conversion, star, & traffic-->
 <script type="text/javascript">
     $(document).ready(function () {
+        //Create javascript arrays from Model Data
+        //Assumes Model is all of the same length
         var labelArray@(Model.InputDate.DayOfWeek) = []; //creates a javascript array for x-axis labels to be used by chart
         @foreach (var t in Model.TimePeriod) //gets the time periods from Model and pushes into javascript array
         {
@@ -125,13 +127,49 @@
         var convArray@(Model.InputDate.DayOfWeek) = []; //creates a javascript array for conversion values to be used by chart
         @foreach (var c in Model.ConversionPercent) //gets the conversion values from Model and pushes into javascript array
         {
-            @:convArray@(Model.InputDate.DayOfWeek).push("@((c*100).ToString("0.##"))");
+            @:convArray@(Model.InputDate.DayOfWeek).push("@((c * 100).ToString("0.##"))");
         }
         var starArray@(Model.InputDate.DayOfWeek) = []; //creates a javascript array for TPLH values to be used by chart
-        @foreach (var s in Model.TPLH) //gets the TPLH valuess from Model and pushes into javascript array
+        @foreach (var s in Model.TPLH) //gets the TPLH values from Model and pushes into javascript array
         {
             @:starArray@(Model.InputDate.DayOfWeek).push("@(s.ToString("0.##"))");
         }
+        var trafficArray@(Model.InputDate.DayOfWeek) = []; //creates a javascript array for TPLH values to be used by chart
+        @foreach (var s in Model.TrafficTY) //gets the traffic values from Model and pushes into javascript array
+        {
+            @:trafficArray@(Model.InputDate.DayOfWeek).push("@(s.ToString("0"))");
+        }
+        //
+        //Trim zero values from end of arrays
+        var trimUnits = 0;
+        var position = @(Model.TimePeriod.Count()) - 1;
+        while (position >= 0  && convArray@(Model.InputDate.DayOfWeek)[position] == 0 && starArray@(Model.InputDate.DayOfWeek)[position] == 0 && trafficArray@(Model.InputDate.DayOfWeek)[position] == 0)
+        {
+            console.log(position);
+            console.log(trimUnits);
+            trimUnits++;
+            position--;
+        }
+        labelArray@(Model.InputDate.DayOfWeek).splice(position+1,trimUnits);
+        trafficArray@(Model.InputDate.DayOfWeek).splice(position+1,trimUnits);
+        starArray@(Model.InputDate.DayOfWeek).splice(position+1,trimUnits);
+        convArray@(Model.InputDate.DayOfWeek).splice(position+1,trimUnits);
+
+        //
+        //Trim zero values from beginning of arrays
+        trimUnits = 0;
+        position = 0;
+        while (position< @(Model.TimePeriod.Count()) && convArray@(Model.InputDate.DayOfWeek)[position] == 0 && starArray@(Model.InputDate.DayOfWeek)[position] == 0 && trafficArray@(Model.InputDate.DayOfWeek)[position] == 0)
+        {
+            trimUnits++;
+            position++;
+        }
+        labelArray@(Model.InputDate.DayOfWeek).splice(0,trimUnits);
+        trafficArray@(Model.InputDate.DayOfWeek).splice(0,trimUnits);
+        starArray@(Model.InputDate.DayOfWeek).splice(0,trimUnits);
+        convArray@(Model.InputDate.DayOfWeek).splice(0,trimUnits);
+
+
         //initiales new chart with id: dayChart[DayOfWeek] (e.g. dayChartSunday, dayChartMonday, etc)
         //creates new variable myChart[DayOfWeek] (e.g. myChartSunday, myChartMonday, etc)
         var myChart@(Model.InputDate.DayOfWeek) = new Chart($("#dayChart@(Model.InputDate.DayOfWeek)"), {
@@ -143,9 +181,8 @@
                         type: 'line', //changes this data series to line
                         label: "Traffic TY", //label for series, including tooltip when hovering
                         // The actual data for the Traffic data series
-                        //sets traffic data to Model.TraffiTY[]
-                        //string.Join used to format data as javascript array
-                        data: [ @(string.Join(", ", Model.TrafficTY))],
+                        //sets traffic data to javascript array variable defined above chart initialization
+                        data: trafficArray@(Model.InputDate.DayOfWeek),
                         fill: false,
                         backgroundColor: "rgba(255, 99, 132, 0.2)",
                         borderColor: "rgba(255, 99, 132, 1)",
