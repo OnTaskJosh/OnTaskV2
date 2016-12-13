@@ -163,7 +163,7 @@ namespace OnTaskV2.BLL
                 var volumes = db.HistoricData.Where(d => d.StoreNumber == storeNum && d.DriverName == driver && DbFunctions.TruncateTime(d.Date) == DbFunctions.TruncateTime(startWeekDate.Date));
                 if(volumes != null)
                 {
-                    foreach(var vol in volumes)
+                    foreach(var vol in volumes.ToList())
                     {
                         volumeTotal += vol.Quantity;
                     }

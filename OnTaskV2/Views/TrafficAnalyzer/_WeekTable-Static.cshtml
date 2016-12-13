@@ -1,4 +1,5 @@
 ﻿@model OnTaskV2.Models.ViewModels.TA_Table
+@using OnTaskV2.BLL
 
 @{ 
     ViewBag.Title = "Labor Optimization Table";
@@ -202,7 +203,7 @@
                 {
                     @Html.AntiForgeryToken()
                     <input name="storeId" type="hidden" value="@Model.InputStoreId">
-                    <input name="date" type="hidden" value="@Model.InputDate">
+                    <input name="date" type="hidden" value="@Model.InputDate.StartOfWeek(DayOfWeek.Sunday)">
                     <input name="star" type="hidden" value="@Model.InputSTAR">
                 }
             </div>
@@ -216,7 +217,7 @@
                 {
                     @Html.AntiForgeryToken()
                     <input name="storeId" type="hidden" value="@Model.InputStoreId">
-                    <input name="date" type="hidden" value="@Model.InputDate.AddDays(1)">
+                    <input name="date" type="hidden" value="@Model.InputDate.StartOfWeek(DayOfWeek.Sunday).AddDays(1)">
                     <input name="star" type="hidden" value="@Model.InputSTAR">
                 }
             </div>
@@ -230,7 +231,7 @@
                 {
                     @Html.AntiForgeryToken()
                     <input name="storeId" type="hidden" value="@Model.InputStoreId">
-                    <input name="date" type="hidden" value="@Model.InputDate.AddDays(2)">
+                    <input name="date" type="hidden" value="@Model.InputDate.StartOfWeek(DayOfWeek.Sunday).AddDays(2)">
                     <input name="star" type="hidden" value="@Model.InputSTAR">
                 }
             </div>
@@ -244,7 +245,7 @@
                 {
                     @Html.AntiForgeryToken()
                     <input name="storeId" type="hidden" value="@Model.InputStoreId">
-                    <input name="date" type="hidden" value="@Model.InputDate.AddDays(3)">
+                    <input name="date" type="hidden" value="@Model.InputDate.StartOfWeek(DayOfWeek.Sunday).AddDays(3)">
                     <input name="star" type="hidden" value="@Model.InputSTAR">
                 }
             </div>
@@ -258,7 +259,7 @@
                 {
                     @Html.AntiForgeryToken()
                     <input name="storeId" type="hidden" value="@Model.InputStoreId">
-                    <input name="date" type="hidden" value="@Model.InputDate.AddDays(4)">
+                    <input name="date" type="hidden" value="@Model.InputDate.StartOfWeek(DayOfWeek.Sunday).AddDays(4)">
                     <input name="star" type="hidden" value="@Model.InputSTAR">
                 }
             </div>
@@ -272,7 +273,7 @@
                 {
                     @Html.AntiForgeryToken()
                     <input name="storeId" type="hidden" value="@Model.InputStoreId">
-                    <input name="date" type="hidden" value="@Model.InputDate.AddDays(5)">
+                    <input name="date" type="hidden" value="@Model.InputDate.StartOfWeek(DayOfWeek.Sunday).AddDays(5)">
                     <input name="star" type="hidden" value="@Model.InputSTAR">
                 }
             </div>
@@ -286,7 +287,7 @@
                 {
                     @Html.AntiForgeryToken()
                     <input name="storeId" type="hidden" value="@Model.InputStoreId">
-                    <input name="date" type="hidden" value="@Model.InputDate.AddDays(6)">
+                    <input name="date" type="hidden" value="@Model.InputDate.StartOfWeek(DayOfWeek.Sunday).AddDays(6)">
                     <input name="star" type="hidden" value="@Model.InputSTAR">
                 }
             </div>
