@@ -292,6 +292,7 @@
     <Content Include="Views\TrafficAnalyzer\_WeekScatterChart_StarConv.cshtml" />
     <Content Include="Views\TrafficAnalyzer\_DayChart_StarConvTraffic.cshtml" />
     <Content Include="Views\TrafficAnalyzer\_DayScatterChart_StarConv.cshtml" />
+    <Content Include="Views\TrafficAnalyzer\_DayHoursChart_SchedRecmnd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
