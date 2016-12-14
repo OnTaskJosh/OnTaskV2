@@ -289,7 +289,9 @@
     <Content Include="Views\TrafficAnalyzer\_DayTable-Static.cshtml" />
     <Content Include="Views\TrafficAnalyzer\_WeekTable-Static.cshtml" />
     <Content Include="Views\TrafficAnalyzer\_TrafficAnalyzerTable.cshtml" />
-    <Content Include="Views\TrafficAnalyzer\_WeekScatterChartStarConv.cshtml" />
+    <Content Include="Views\TrafficAnalyzer\_WeekScatterChart_StarConv.cshtml" />
+    <Content Include="Views\TrafficAnalyzer\_DayChart_StarConvTraffic.cshtml" />
+    <Content Include="Views\TrafficAnalyzer\_DayScatterChart_StarConv.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

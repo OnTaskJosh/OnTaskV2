@@ -178,6 +178,7 @@ namespace OnTaskV2.Controllers
             table.TargetSTAR = Convert.ToDecimal(star);
             return PartialView("_DayTable-Static",table);
         }
+        
 
         [HttpPost]
         public ActionResult WeekScatterChart_Star_Conv(int storeId, DateTime date, decimal? star)
@@ -231,7 +232,7 @@ namespace OnTaskV2.Controllers
                 table.AvgTransactions[i] = (table.Sales[i] > 0) ? (table.Sales[i] / table.Transactions[i]) : 0.0M;
             }
             table.TargetSTAR = Convert.ToDecimal(star);
-            return PartialView("_WeekScatterChartStarConv", table);
+            return PartialView("_WeekScatterChart_StarConv", table);
         }
     }
 }
