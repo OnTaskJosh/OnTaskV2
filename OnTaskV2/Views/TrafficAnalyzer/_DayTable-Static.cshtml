@@ -46,7 +46,7 @@
         {
             if (Model.TrafficTY[i] != 0)
             {
-                <tr class="@(Model.IsPeakPeriod[i] ? "warning": "")">
+                <tr class="@(Model.IsPeakPeriod[i] ? "warning" : "")">
                     <td>@Model.StartTime.Add(new TimeSpan(Model.TimeIncrement.Ticks * i)).ToShortTimeString()</td>
                     <td>@Model.TrafficTY[i].ToString("0.##")</td>
                     <td>@Model.TrafficPercent[i].ToString("0.##%")</td>
@@ -81,21 +81,12 @@
 
 <br>
 
-<!-- html element for line / bar chart with star, conversion, & traffic-->
-<!-- e.g. id = "dayChartSunday", "dayChartMonday", etc-->
-<canvas id="dayChart@(Model.InputDate.DayOfWeek)" width="800" height="400"></canvas>
+@{Html.RenderPartial("_DayChart_StarConvTraffic", Model);}
+
 
 <br>
 
-<!-- html element for line chart with scheduled Vs recommended hours-->
-<!-- e.g. id = "dayChartSunday", "dayChartMonday", etc-->
-<canvas id="daySchedChart@(Model.InputDate.DayOfWeek)" width="800" height="400"></canvas>
-
-<br>
-
-<!-- html element for scatter chart-->
-<!-- e.g. id = "dayScatterChartSunday", "dayScatterChartMonday", etc-->
-<canvas id="dayScatterChart@(Model.InputDate.DayOfWeek)" width="800" height="400"></canvas>
+@{Html.RenderPartial("_DayScatterChart_StarConv", Model);}
 
 <!--Initialize dataTable-->
 <script type="text/javascript" language=javascript>

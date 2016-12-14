@@ -1,0 +1,51 @@
+﻿@model OnTaskV2.Models.ViewModels.TA_Table
+
+
+<!-- html element for scatter chart-->
+<!-- e.g. id = "dayScatterChartSunday", "dayScatterChartMonday", etc-->
+<canvas id="dayScatterChart@(Model.InputDate.DayOfWeek)" width="800" height="400"></canvas>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var scatterArray@(Model.InputDate.DayOfWeek) = [
+            @for(int i = 0; i<Model.TimePeriod.Count();i++)
+            {
+                @:{x: @(Model.TPLH[i].ToString("0.##")) , y: @((Model.ConversionPercent[i] * 100).ToString("0.##")), r: 10},
+            }
+        ];
+
+        var myScatterChart@(Model.InputDate.DayOfWeek) = new Chart($("#dayScatterChart@(Model.InputDate.DayOfWeek)"), {
+            type: 'bubble',
+            data: {
+                datasets: [{
+                    label: 'Scatter Dataset',
+                    data: scatterArray@(Model.InputDate.DayOfWeek),
+                    backgroundColor:"#FF6384",
+                    hoverBackgroundColor: "#FF6384",
+                }]
+            },
+            options: {
+                elements: {
+                    points: {
+                        borderWidth: 1,
+                        borderColor: 'rgb(0, 0, 0)'
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "STAR",
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Conversion %",
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
