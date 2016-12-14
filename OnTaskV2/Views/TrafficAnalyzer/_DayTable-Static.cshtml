@@ -81,10 +81,15 @@
 
 <br>
 
-
 <!-- html element for line / bar chart with star, conversion, & traffic-->
 <!-- e.g. id = "dayChartSunday", "dayChartMonday", etc-->
 <canvas id="dayChart@(Model.InputDate.DayOfWeek)" width="800" height="400"></canvas>
+
+<br>
+
+<!-- html element for line chart with scheduled Vs recommended hours-->
+<!-- e.g. id = "dayChartSunday", "dayChartMonday", etc-->
+<canvas id="daySchedChart@(Model.InputDate.DayOfWeek)" width="800" height="400"></canvas>
 
 <br>
 
@@ -239,7 +244,114 @@
     });
 </script>
 
+<!--Initialize line chart with Scheduled Vs Recommended hours-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        var labelDayArray@(Model.InputDate.DayOfWeek) = []; //creates a javascript array for x-axis labels to be used by chart
+        @foreach (var t in Model.TimePeriod) //gets the time periods from Model and pushes into javascript array
+        {
+            @:labelDayArray@(Model.InputDate.DayOfWeek).push("@t");
+                }
+        var schedDayArray@(Model.InputDate.DayOfWeek) = []; //creates a javascript array for scheduled hours to be used by chart
+        @foreach (var a in Model.ActualHours) //gets the actual hours from Model and pushes into javascript array
+        {
+            @:schedDayArray@(Model.InputDate.DayOfWeek).push("@(a.ToString("0.##"))");
+        }
+        var recmndDayArray@(Model.InputDate.DayOfWeek) = []; //creates a javascript array for recommended hours to be used by chart
+        @foreach (var r in Model.RecommendHours) //gets the recommended hours from Model and pushes into javascript array
+        {
+            @:recmndDayArray@(Model.InputDate.DayOfWeek).push("@(r.ToString("0.##"))");
+        }
 
+        //initiales new chart with id: daySchedChart[DayOfWeek] (e.g. daySchedChartSunday, daySchedChartMonday, etc)
+        //creates new variable mySchedChart[DayOfWeek] (e.g. mySchedChartSunday, mySchedChartMonday, etc)
+        var mySchedChart@(Model.InputDate.DayOfWeek) = new Chart($("#daySchedChart@(Model.InputDate.DayOfWeek)"), {
+            type: 'line', //bar chart needed for mixed line/bar charts
+            data: {
+                labels: labelDayArray@(Model.InputDate.DayOfWeek), //sets labels to javascript array variable created above
+                datasets: [
+                    {
+                        type: 'line', //changes this data series to line
+                        label: "Scheduled", //label for series, including tooltip when hovering
+                        // The actual data for the Traffic data series
+                        //sets traffic data to Model.TraffiTY[]
+                        //string.Join used to format data as javascript array
+                        data: schedDayArray@(Model.InputDate.DayOfWeek),
+                        fill: true,
+                        backgroundColor: "rgba(97, 97, 97, 0.1)",
+                        borderColor: "rgba(97, 97, 97, 1)",
+                        borderCapStyle: 'butt',
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        borderJoinStyle: 'miter',
+                        lineTension: 0.3,
+                        pointBackgroundColor: "#eee",
+                        pointBorderColor: "rgba(97, 97, 97, 1)",
+                        pointBorderWidth: 1,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "rgba(97, 97, 97, 0.4)",
+                        pointHoverBorderColor: "rgba(97, 97, 97, 1)",
+                        pointHoverBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHitRadius: 10
+                    },
+                    {
+                        type: 'line', //changes this data series to line
+                        label: "Recommended", //label for series, including tooltip when hovering
+                        // The actual data for the Traffic data series
+                        //sets traffic data to Model.TraffiTY[]
+                        //string.Join used to format data as javascript array
+                        data: recmndDayArray@(Model.InputDate.DayOfWeek),
+                        fill: true,
+                        backgroundColor: "rgba(192, 60, 60, 0.2)",
+                        borderColor: "rgba(192, 60, 60, 1)",
+                        borderCapStyle: 'butt',
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        borderJoinStyle: 'miter',
+                        lineTension: 0.3,
+                        pointBackgroundColor: "#fff",
+                        pointBorderColor: "rgba(192, 60, 60, 1)",
+                        pointBorderWidth: 1,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "rgba(192, 60, 60, 0.4)",
+                        pointHoverBorderColor: "rgba(192, 60, 60, 1)",
+                        pointHoverBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHitRadius: 10
+                    }
+                ]
+            },
+            options: {
+                title: { //overall chart title
+                    display: true,
+                    text: "Scheduled & Recommended Hours"
+                },
+                tooltips: {
+                    mode: 'label', //uses dataSeries labels
+                },
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        stacked: false,
+                    }],
+                    yAxes: [{
+                        position: 'left', //y-axis for line series
+                        display: true,
+                        labelString: "Labor Hours",
+                        stacked: false,
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
+
+
+<!--Initialize scatter chart with conversion, TPLH-->
 <script type="text/javascript">
     $(document).ready(function () {
         var scatterArray@(Model.InputDate.DayOfWeek) = [
