@@ -29,8 +29,12 @@ namespace OnTaskV2.Controllers
         // GET: TrafficAnalyzer
         public ActionResult Index()
         {
+            var client = "NRF Demo"; //TODO: change to User's client or client selector for Claris users
+            var taIndex = new TAIndex() {
+                OrgHierarchy = db.OrgHierarchy.Where(o => o.Client.Name == client).Include(o=>o.Countries).FirstOrDefault(),
+            }; 
             ViewBag.StoresList = new SelectList(db.Stores, "ID", "NumberName");
-            return View();
+            return View("Index", taIndex);
         }
 
         [HttpPost]

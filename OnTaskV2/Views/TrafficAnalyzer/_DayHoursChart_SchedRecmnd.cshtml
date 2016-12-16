@@ -2,7 +2,7 @@
 
 <!-- html element for line chart with scheduled Vs recommended hours-->
 <!-- e.g. id = "dayChartSunday", "dayChartMonday", etc-->
-<canvas id="dayHoursChart@(Model.InputDate.DayOfWeek)" width="800" height="400"></canvas>
+<canvas id="dayHoursChart@(Model.InputDate.DayOfWeek)" style="width:600px; height:300px;"></canvas>
 
 <!--Initialize line chart with Scheduled Vs Recommended hours-->
 <script type="text/javascript">
@@ -22,6 +22,32 @@
         {
             @:recmndDayArray@(Model.InputDate.DayOfWeek).push("@(r.ToString("0.##"))");
         }
+
+        //
+        //Trim zero values from end of arrays
+        var trimUnits = 0;
+        var position = @(Model.TimePeriod.Count()) - 1;
+        while (position >= 0  && schedDayArray@(Model.InputDate.DayOfWeek)[position] == 0 && recmndDayArray@(Model.InputDate.DayOfWeek)[position] == 0 )
+        {
+            trimUnits++;
+            position--;
+        }
+        labelDayArray@(Model.InputDate.DayOfWeek).splice(position+1,trimUnits);
+        schedDayArray@(Model.InputDate.DayOfWeek).splice(position+1,trimUnits);
+        recmndDayArray@(Model.InputDate.DayOfWeek).splice(position+1,trimUnits);
+
+        //
+        //Trim zero values from beginning of arrays
+        trimUnits = 0;
+        position = 0;
+        while (position< @(Model.TimePeriod.Count()) && schedDayArray@(Model.InputDate.DayOfWeek)[position] == 0 && recmndDayArray@(Model.InputDate.DayOfWeek)[position] == 0)
+        {
+            trimUnits++;
+            position++;
+        }
+        labelDayArray@(Model.InputDate.DayOfWeek).splice(0,trimUnits);
+        schedDayArray@(Model.InputDate.DayOfWeek).splice(0,trimUnits);
+        recmndDayArray@(Model.InputDate.DayOfWeek).splice(0,trimUnits);
 
         //initiales new chart with id: daySchedChart[DayOfWeek] (e.g. daySchedChartSunday, daySchedChartMonday, etc)
         //creates new variable mySchedChart[DayOfWeek] (e.g. mySchedChartSunday, mySchedChartMonday, etc)

@@ -1,4 +1,5 @@
 ﻿/// <autosync enabled="true" />
+/// <reference path="bootsidemenu.js" />
 /// <reference path="bootstrap.min.js" />
 /// <reference path="chart.min.js" />
 /// <reference path="datatables.bootstrap.min.js" />
