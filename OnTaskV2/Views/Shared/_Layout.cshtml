@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - OnTaskV2</title>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/unobtrusiveajax")
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/datatables")
 
@@ -74,8 +75,9 @@
             </div>
         </div>
     </nav>
-    <div class="container body-content">
+    <div class="body-content">
         @RenderBody()
+        <br />
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year Etavate - Claris Software Holdings</p>
@@ -85,7 +87,6 @@
     
 
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/unobtrusiveajax")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/datatables")
     @Scripts.Render("~/bundles/bootstrap")

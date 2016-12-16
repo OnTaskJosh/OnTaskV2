@@ -1,61 +1,141 @@
-﻿@{
+﻿@model OnTaskV2.Models.ViewModels.TAIndex
+
+@{
     ViewBag.Title = "Traffic Analyzer";
 }
-
-<h2>Traffic Analyzer</h2>
-
-<hr />
-
 
 @using (Ajax.BeginForm("WeekTable","TrafficAnalyzer", new AjaxOptions{ HttpMethod = "Post", UpdateTargetId = "replaceTableTarget", OnSuccess = "weekTableOnSuccess"}))
 {
     @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="form-horizontal">
-            <div class="form-group">
-                <span class="control-label col-md-2" style="font-weight: bold">Store</span>
-                <div class="col-md-10">
-                    @Html.DropDownList("storeId", ViewBag.StoresList as SelectList, "--Select--", htmlAttributes: new { @class = "form-control", @id = "storeIdDropdown" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <span class="control-label col-md-2" style="font-weight: bold">Date</span>
-                <div class="col-md-10">
-                    @Html.Editor("date", new { htmlAttributes = new { @class = "form-control datecontrol", type = "date"} })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <span class="control-label col-md-2" style="font-weight: bold">Target STAR</span>
-                <div class="col-md-10">
-                    @Html.Editor("star", new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-            </div>
+    <!--Side Menu -->
+    <div id="taSideMenu">
+        <div>
+            <h2>Traffic Analyzer</h2>
         </div>
+        <div class="list-group">
+            @foreach (var c in Model.OrgHierarchy.Countries)
+            {
+                <a href="#countryItem@(c.ID)" class="list-group-item" data-toggle="collapse"style="padding-left:2px;">Country: @c.Name</a>
+                <div class="list-group collapse" id="countryItem@(c.ID)">
+                    @foreach (var d in c.Divisions)
+                    {
+                        <a href="#divisionItem@(d.ID)" class="list-group-item" data-toggle="collapse" style="padding-left:10px;">Division: @d.Name</a>
+                        <div class="list-group collapse" id="divisionItem@(d.ID)">
+                            @foreach (var r in d.Regions)
+                            {
+                                <a href="#regionItem@(r.ID)" class="list-group-item" data-toggle="collapse" style="padding-left:20px;">Region: @r.Name</a>
+                                <div class="list-group collapse" id="regionItem@(r.ID)">
+                                    @foreach (var d2 in r.Districts)
+                                    {
+                                        <a href="#districtItem@(d2.ID)" class="list-group-item" data-toggle="collapse" style="padding-left:30px;">District: @d2.Name</a>
+                                        <div class="list-group collapse" id="districtItem@(d2.ID)">
+                                            @foreach (var s in d2.Stores)
+                                            {
+                                                <span class="list-group-item" style="padding-left:40px;">@s.NumberName</span>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+    <!--/Side Menu -->
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-4">
-                <button type="submit" id="generateTableSubmit" class="btn btn-primary" data-loading-text="Generating..." ><span class='glyphicon glyphicon-list-alt'></span> Run Data</button>
+    <!--Options Ribbon-->
+    <div class="row">
+        <div id="taOptionRibbon" class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".main-nav">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="navbar-form">
+                        <div class="form-group">
+                            <span id="dropdownMenuStore" class="control-label" style="font-weight: bold">Store</span>
+                            <span aria-labelledby="dropdownMenuStore">
+                                @Html.DropDownList("storeId", ViewBag.StoresList as SelectList, "--Select--", htmlAttributes: new { @class = "form-control  dropdown-toggle", @id = "storeIdDropdown" })
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="control-label" style="font-weight: bold">Date</span>
+                            <span class="">
+                                @Html.Editor("date", new { htmlAttributes = new { @class = "form-control datecontrol", type = "date" } })
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="control-label" style="font-weight: bold">Target STAR</span>
+                            <span class="">
+                                @Html.Editor("star", new { htmlAttributes = new { @class = "form-control", type = "number" } })
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <span class="pull-right">
+                                <button type="submit" id="generateTableSubmit" class="btn btn-primary" data-loading-text="Generating..."><span class='glyphicon glyphicon-list-alt'></span> Run Data</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <!--/Options Ribbon-->
 }
 
-<hr id="lineBreakTable" />
-<div class="col-lg-12"  style="align-content:center;">
-    <div id="replaceTableTarget">
-        <img src="~/img/indicator.white.gif" /> Loading Table Data...
+<!--Table Work Area-->
+<div id="taWorkArea"  style="position:relative; top:54px; height:81vh; width:100%; overflow-y:auto; overflow-x:hidden; padding:3px;">
+    <div  class="row">
+        <div class="col-lg-12" >
+            <div id="replaceTableTarget">
+                <img src="~/img/indicator.white.gif" /> Loading Table Data...
+            </div>
+        </div>
     </div>
+
 </div>
+<!--/Table Work Area-->
+
 
 <script type="text/javascript">
     $(document).ready(function () {
         $('#lineBreakTable').hide();
         $('#replaceTableTarget').hide();
+        $('#taOptionRibbon').css("padding-left", "15%"); //to match with side menu open on load
+        $('#taSideMenu').BootSideMenu({  //initialize Side Menu for Traffic Analyzer //Functions to call on side menu actions
+            side: "left",
+            remember: false,
+            onTogglerClick: function () {//code to be executed when the toggler arrow was clicked
+            },
+            onBeforeOpen: function () {
+                //code to be executed before menu open
+            },
+            onBeforeClose: function () {
+                //code to be executed before menu close
+            },
+            onOpen: function () {
+                //code to be executed after menu open
+                $('#taOptionRibbon').css("padding-left","15%");
+            },
+            onClose: function () {
+                //code to be executed after menu close
+                $('#taOptionRibbon').css("padding-left", "0%");
+            },
+            onStartup: function () {
+                //code to be executed when the plugin is called
+            }
+        });
+
         $("#generateTableSubmit").click(function () {
             $('#lineBreakTable').show();
             $('#replaceTableTarget').show();
@@ -66,5 +146,4 @@
     var weekTableOnSuccess = function (result) {
 
     };
-
 </script>

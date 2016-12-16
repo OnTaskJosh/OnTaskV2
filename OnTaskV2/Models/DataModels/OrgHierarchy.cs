@@ -27,7 +27,7 @@ namespace OnTaskV2.Models.DataModels
         public virtual OrgHierarchy OrgHierarchy { get; set; } //Navigation Property
         public virtual ICollection<Division> Divisions { get; set; } //Navigation Property
 
-        public string Name { get; set; }
+        public string Name { get; set; } //Names need to be unique for each class in OrgHierarchy
     }
 
     public class Division

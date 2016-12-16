@@ -4,9 +4,15 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using OnTaskV2.Models.DataModels;
 
 namespace OnTaskV2.Models.ViewModels
 {
+    public class TAIndex
+    {
+        public OrgHierarchy OrgHierarchy { get; set; }
+    }
+
     public class TrafficAnalyzer
     {
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]

@@ -25,10 +25,12 @@ namespace OnTaskV2
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/BootSideMenu.js",
                       "~/Scripts/respond.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/BootSideMenu.css",
                       "~/Content/site.css"));
 
             
