@@ -86,6 +86,11 @@
 
 <br>
 
+@{Html.RenderPartial("_DayHoursChart_SchedRecmnd", Model);}
+
+<br>
+
+
 @{Html.RenderPartial("_DayScatterChart_StarConv", Model);}
 
 <!--Initialize dataTable-->
@@ -109,3 +114,5 @@
          });
      });
 </script>
+
+
