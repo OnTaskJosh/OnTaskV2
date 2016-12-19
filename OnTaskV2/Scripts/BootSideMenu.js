@@ -21,7 +21,7 @@
             autoClose: false,
             pushBody: true,
             closeOnClick: true,
-            width: "15%",
+            width: "18%",
             onTogglerClick: function () {
                 //code to be executed when the toggler arrow was clicked
             },

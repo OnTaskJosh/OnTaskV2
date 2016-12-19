@@ -4,12 +4,12 @@
     ViewBag.Title = "Traffic Analyzer";
 }
 
-@using (Ajax.BeginForm("WeekTable","TrafficAnalyzer", new AjaxOptions{ HttpMethod = "Post", UpdateTargetId = "replaceTableTarget", OnSuccess = "weekTableOnSuccess"}))
+@using (Ajax.BeginForm("WeekTable","TrafficAnalyzer", new AjaxOptions{ HttpMethod = "Post", UpdateTargetId = "replaceTableTarget", OnSuccess = "weekTableOnSuccess"}, new { @class = "form-inline" }))
 {
     @Html.AntiForgeryToken()
     <!--Side Menu -->
     <div id="taSideMenu">
-        <div>
+        <div style="padding-left:3px;">
             <h2>Traffic Analyzer</h2>
         </div>
         <div class="list-group">
@@ -31,7 +31,11 @@
                                         <div class="list-group collapse" id="districtItem@(d2.ID)">
                                             @foreach (var s in d2.Stores)
                                             {
-                                                <span class="list-group-item" style="padding-left:40px;">@s.NumberName</span>
+                                                <label class="checkbox-inline" style="padding-left:60px;">
+                                                    <input class="list-group-item storeCheck" type="checkbox" name="storeId" value="@(s.ID)" style="margin-top:4px;" />
+                                                    @s.NumberName
+                                                </label>
+                                                
                                             }
                                         </div>
                                     }
@@ -60,12 +64,7 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                     <div class="navbar-form">
-                        <div class="form-group">
-                            <span id="dropdownMenuStore" class="control-label" style="font-weight: bold">Store</span>
-                            <span aria-labelledby="dropdownMenuStore">
-                                @Html.DropDownList("storeId", ViewBag.StoresList as SelectList, "--Select--", htmlAttributes: new { @class = "form-control  dropdown-toggle", @id = "storeIdDropdown" })
-                            </span>
-                        </div>
+                        
 
                         <div class="form-group">
                             <span class="control-label" style="font-weight: bold">Date</span>
@@ -141,9 +140,14 @@
             $('#replaceTableTarget').show();
             $('#replaceTableTarget').innerHTML = '<img src="~/img/indicator.white.gif" /> Loading Table Data...';
         });
-    });
-    
-    var weekTableOnSuccess = function (result) {
 
-    };
+        
+        $('.storeCheck').click(function () {
+            $(".storeCheck").each(function () { //Uncheck all other store checkboxes
+                this.checked = false;
+            });
+            $(this).prop('checked', true); //Re-check this checkbox
+        });
+
+    });
 </script>

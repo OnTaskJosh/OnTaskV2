@@ -181,20 +181,6 @@
                 </div>
             </div>
             <br />
-            <div>
-                <div>
-                    @using (Ajax.BeginForm("WeekScatterChart_Star_Conv", "TrafficAnalyzer", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "scatterChartTarget", }, new { @id = "weekScatterChartForm" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <input name="storeId" type="hidden" value="@Model.InputStoreId">
-                        <input name="date" type="hidden" value="@Model.InputDate">
-                        <input name="star" type="hidden" value="@Model.InputSTAR">
-                    }
-                </div>
-                <div class="partialContentsLoadWeekScatterChart col-lg-12" id="scatterChartTarget">
-                    <img src="~/img/indicator.white.gif" /> Loading Scatter Chart Data...
-                </div>
-            </div>
 
         </div>
         <div role="tabpanel" class="tab-pane fade" id="sundayTable">
@@ -308,7 +294,6 @@
              $(this).submit();
          });
 
-         $("#weekScatterChartForm").submit();
 
          $.fn.dataTable.moment('dddd');
 
