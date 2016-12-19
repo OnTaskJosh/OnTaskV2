@@ -38,7 +38,7 @@ namespace OnTaskV2.Controllers
         }
 
         [HttpPost]
-        public ActionResult WeekTable(int storeId, DateTime date, decimal? star)
+        public ActionResult WeekTable(int storeId, DateTime date, decimal? baseStar, decimal? peakStar)
         {
             var store = db.Stores.Find(storeId);
             var sundayDate = date.AddDays(DayOfWeek.Sunday - date.DayOfWeek);
@@ -47,7 +47,8 @@ namespace OnTaskV2.Controllers
             {
                 InputStoreId = storeId,
                 InputDate = date,
-                InputSTAR = star,
+                InputBaseSTAR = baseStar,
+                InputPeakSTAR = peakStar,
                 BaseHours = 0.0M,
                 BudgetHours = 0.0M,
                 NonSellHours = 0.0M,
@@ -82,19 +83,20 @@ namespace OnTaskV2.Controllers
                 table.TimePeriod[i] = table.StartTime.Add(new TimeSpan(table.TimeIncrement.Ticks * i)).ToShortTimeString();
                 table.ConversionPercent[i] = (table.TrafficTY[i] != 0) ? (table.Transactions[i] / table.TrafficTY[i]) : 0.0M ;
                 table.TrafficPercent[i] = (totalTraffic > 0) ? (table.TrafficTY[i] / totalTraffic) : 0.0M;
-                table.RecommendHours[i] = (star != null && star > 0) ? (table.TrafficTY[i] / Convert.ToDecimal(star)) : 0.0M;
                 table.AdjustHours[i] = table.RecommendHours[i]; //default set adjusted hours to recommended hours
                 table.TPLH[i] = (table.ActualHours[i] > 0) ? (table.TrafficTY[i] / table.ActualHours[i]) : 0.0M;
-                table.PlusMinusHours[i] = table.ActualHours[i] - table.RecommendHours[i];
                 table.AvgTransactions[i] = (table.Sales[i] > 0) ? (table.Sales[i] / table.Transactions[i]) : 0.0M;
+                //table.RecommendHours[i] = (star != null && star > 0) ? (table.TrafficTY[i] / Convert.ToDecimal(star)) : 0.0M; //TODO: Doesn't break day hours into peak & base star
+                //table.PlusMinusHours[i] = table.ActualHours[i] - table.RecommendHours[i]; //TODO: Doesn't break day hours into peak & base star
             }
-            table.TargetSTAR = Convert.ToDecimal(star);
+            table.TargetBaseSTAR = Convert.ToDecimal(baseStar);
+            table.TargetPeakSTAR = Convert.ToDecimal(peakStar);
             return PartialView("_WeekTable-Static", table);
         }
 
 
         [HttpPost]
-        public PartialViewResult DayTable(int storeId, DateTime date, decimal? star)
+        public PartialViewResult DayTable(int storeId, DateTime date, decimal? baseStar, decimal? peakStar)
         {
             var timeInc = 24; //96 = 15 minute increments, 24 = hourly
             //timeInc = GetTimeInc(); //TODO: create function
@@ -105,7 +107,8 @@ namespace OnTaskV2.Controllers
             {
                 InputStoreId = storeId,
                 InputDate = date,
-                InputSTAR = star,
+                InputBaseSTAR = baseStar,
+                InputPeakSTAR = peakStar,
                 BaseHours = 0.0M,
                 BudgetHours = 0.0M,
                 NonSellHours = 0.0M,
@@ -162,10 +165,8 @@ namespace OnTaskV2.Controllers
                 table.TimePeriod[i] = table.StartTime.Add(new TimeSpan(table.TimeIncrement.Ticks * i)).ToShortTimeString();
                 table.ConversionPercent[i] = (table.Transactions[i] > 0) ? (table.Transactions[i] / table.TrafficTY[i]) : 0.0M;
                 table.TrafficPercent[i] = (totalTraffic > 0) ? (table.TrafficTY[i] / totalTraffic) : 0.0M;
-                table.RecommendHours[i] = (star != null && star > 0) ? (table.TrafficTY[i] / Convert.ToDecimal(star)) : 0.0M;
                 table.AdjustHours[i] = table.RecommendHours[i]; //default set adjusted hours to recommended hours
                 table.TPLH[i] = (table.ActualHours[i] > 0) ? (table.TrafficTY[i] / table.ActualHours[i]) : 0.0M;
-                table.PlusMinusHours[i] = table.RecommendHours[i] - table.ActualHours[i];
                 if (timeInc == 96)
                 {
                     //TODO: replace percent with store attribute
@@ -176,16 +177,25 @@ namespace OnTaskV2.Controllers
                     //TODO: replace percent with store attribute
                     table.IsPeakPeriod[i] = table.TrafficPercent[i] >= .09M ? true : false; //hourly increment greater than 9% of total daily traffic 
                 }
-                
+                if(table.IsPeakPeriod[i])
+                {
+                    table.RecommendHours[i] = (peakStar != null && peakStar > 0) ? TrafficAnalyzerHelper.RecommendedHour(table.TrafficTY[i], peakStar) : ((baseStar != null && baseStar > 0) ? TrafficAnalyzerHelper.RecommendedHour(table.TrafficTY[i], baseStar) : 0.0M);
+                }
+                else
+                {
+                    table.RecommendHours[i] = TrafficAnalyzerHelper.RecommendedHour(table.TrafficTY[i], baseStar);
+                }
+                table.PlusMinusHours[i] = table.RecommendHours[i] - table.ActualHours[i];
             }
-            
-            table.TargetSTAR = Convert.ToDecimal(star);
+
+            table.TargetBaseSTAR = Convert.ToDecimal(baseStar);
+            table.TargetPeakSTAR = Convert.ToDecimal(peakStar);
             return PartialView("_DayTable-Static",table);
         }
         
 
         [HttpPost]
-        public ActionResult WeekScatterChart_Star_Conv(int storeId, DateTime date, decimal? star)
+        public ActionResult WeekScatterChart_Star_Conv(int storeId, DateTime date, decimal? baseStar, decimal? peakStar)
         {
             var store = db.Stores.Find(storeId);
             var sundayDate = date.AddDays(DayOfWeek.Sunday - date.DayOfWeek);
@@ -194,7 +204,8 @@ namespace OnTaskV2.Controllers
             {
                 InputStoreId = storeId,
                 InputDate = date,
-                InputSTAR = star,
+                InputBaseSTAR = baseStar,
+                InputPeakSTAR = peakStar,
                 BaseHours = 0.0M,
                 BudgetHours = 0.0M,
                 NonSellHours = 0.0M,
@@ -229,13 +240,14 @@ namespace OnTaskV2.Controllers
                 table.TimePeriod[i] = table.StartTime.Add(new TimeSpan(table.TimeIncrement.Ticks * i)).ToShortTimeString();
                 table.ConversionPercent[i] = (table.Transactions[i] > 0) ? (table.Transactions[i] / table.TrafficTY[i]) : 0.0M ;
                 table.TrafficPercent[i] = (totalTraffic > 0) ? (table.TrafficTY[i] / totalTraffic) : 0.0M;
-                table.RecommendHours[i] = (star != null && star > 0) ? (table.TrafficTY[i] / Convert.ToDecimal(star)) : 0.0M;
                 table.AdjustHours[i] = table.RecommendHours[i]; //default set adjusted hours to recommended hours
                 table.TPLH[i] = (table.ActualHours[i] > 0) ? (table.TrafficTY[i] / table.ActualHours[i]) : 0.0M;
-                table.PlusMinusHours[i] = table.ActualHours[i] - table.RecommendHours[i];
+                //table.RecommendHours[i] = (baseStar != null && baseStar > 0) ? (table.TrafficTY[i] / Convert.ToDecimal(baseStar)) : 0.0M;
+                //table.PlusMinusHours[i] = table.ActualHours[i] - table.RecommendHours[i];
                 table.AvgTransactions[i] = (table.Sales[i] > 0) ? (table.Sales[i] / table.Transactions[i]) : 0.0M;
             }
-            table.TargetSTAR = Convert.ToDecimal(star);
+            table.TargetBaseSTAR = Convert.ToDecimal(baseStar);
+            table.TargetPeakSTAR = Convert.ToDecimal(peakStar);
             return PartialView("_WeekScatterChart_StarConv", table);
         }
     }

@@ -18,14 +18,16 @@ namespace OnTaskV2.Models.ViewModels
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? SelectedDate { get; set; }
         public string SelectedStore { get; set; }
-        public decimal TargetSTAR { get; set; }
+        public decimal? TargetBaseSTAR { get; set; }
+        public decimal? TargetPeakSTAR { get; set; }
     }
 
     public class TA_Table
     {
         public int InputStoreId { get; set; }
         public DateTime InputDate { get; set; }
-        public Decimal? InputSTAR { get; set; }
+        public Decimal? InputBaseSTAR { get; set; }
+        public Decimal? InputPeakSTAR { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         public decimal BudgetHours { get; set; }
@@ -36,7 +38,9 @@ namespace OnTaskV2.Models.ViewModels
         [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
         public decimal SellingHours { get; set; }
         [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
-        public decimal TargetSTAR { get; set; }
+        public decimal TargetBaseSTAR { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
+        public decimal TargetPeakSTAR { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:0.#}", ApplyFormatInEditMode = true)]
         public decimal[] TrafficLY { get; set; } //0-95 //96 total increments in the array. 15-min increments for one full day
