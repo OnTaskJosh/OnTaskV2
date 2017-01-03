@@ -131,7 +131,7 @@ namespace OnTaskV2.Controllers
             table.TimeIncrement = (timeInc != 0) ? (new TimeSpan((table.EndTime - table.StartTime).Ticks / timeInc)) : (new TimeSpan(0));
             try
             {
-                table.BaseHours = _storeAttributeService.GetOpenHoursSum(store, date) * Convert.ToDecimal(store.Attributes.Where(a => a.Name == "Minimum Coverage").First().Value);
+                table.BaseHours = _storeAttributeService.GetBaseCoverageSum(store, date);
             }
             catch
             {
@@ -184,6 +184,11 @@ namespace OnTaskV2.Controllers
                 else
                 {
                     table.RecommendHours[i] = TrafficAnalyzerHelper.RecommendedHour(table.TrafficTY[i], baseStar);
+                }
+                decimal[] baseCov = _storeAttributeService.GetBaseCoverageByHour(store, date);
+                if (table.RecommendHours[i] < baseCov[i])
+                {
+                    table.RecommendHours[i] = baseCov[i];
                 }
                 table.PlusMinusHours[i] = table.RecommendHours[i] - table.ActualHours[i];
             }
