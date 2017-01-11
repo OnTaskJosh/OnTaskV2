@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BLL\DateHelper.cs" />
     <Compile Include="BLL\HistoricDataService.cs" />
+    <Compile Include="BLL\TaskCalendarService.cs" />
     <Compile Include="BLL\StoreAttributeService.cs" />
     <Compile Include="BLL\TrafficAnalyzerHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -180,15 +181,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611281705158_init.cs" />
-    <Compile Include="Migrations\201611281705158_init.Designer.cs">
-      <DependentUpon>201611281705158_init.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DataModels\Client.cs" />
     <Compile Include="Models\DataModels\HistoricData.cs" />
     <Compile Include="Models\DataModels\LaborStandard.cs" />
+    <Compile Include="Models\DataModels\TaskCalendar.cs" />
     <Compile Include="Models\DataModels\OrgHierarchy.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -234,6 +232,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\Local_IIS_Profile.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -303,11 +302,6 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611281705158_init.resx">
-      <DependentUpon>201611281705158_init.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

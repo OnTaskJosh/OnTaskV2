@@ -19,10 +19,12 @@ namespace OnTaskV2.Controllers
         private DatabaseContext db = new DatabaseContext();
         private IHistoricDataService _historicDataService;
         private IStoreAttributeService _storeAttributeService;
+        private ITaskCalendarService _taskCalendarService;
         public TrafficAnalyzerController()
         {
             _historicDataService = new HistoricDataService(db);
             _storeAttributeService = new StoreAttributeService(db);
+            _taskCalendarService = new TaskCalendarService(db);
         }
 
 
@@ -123,8 +125,10 @@ namespace OnTaskV2.Controllers
                 TrafficPercent = new decimal[timeInc],
                 TPLH = new decimal[timeInc],
                 PlusMinusHours = new decimal[timeInc],
-                StartTime = Convert.ToDateTime(store.Attributes.Where(a=>a.Name == openTimeAttr).FirstOrDefault()?.Value),
-                EndTime = Convert.ToDateTime(store.Attributes.Where(a => a.Name == closeTimeAttr).FirstOrDefault()?.Value),
+                StartTime = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0, 0, DateTimeKind.Local),
+                EndTime = new DateTime(date.Year, date.Month, date.Day + 1, 0, 0, 0, 0, DateTimeKind.Local),
+                OpenTime = Convert.ToDateTime(store.Attributes.Where(a=>a.Name == openTimeAttr).FirstOrDefault()?.Value),
+                CloseTime = Convert.ToDateTime(store.Attributes.Where(a => a.Name == closeTimeAttr).FirstOrDefault()?.Value),
                 IsPeakPeriod = new bool[timeInc],
                 TimePeriod = new string[timeInc],
             };
@@ -139,8 +143,8 @@ namespace OnTaskV2.Controllers
 
             var totalWeekTraffic = _historicDataService.GetDriverVolumeSumByWeek("Traffic", store.Number, date);
             var totalWeekLaborHours = _historicDataService.GetDriverVolumeSumByWeek("LaborHours", store.Number, date);
-            table.BudgetHours = (totalWeekTraffic != 0) ? (totalWeekLaborHours * (_historicDataService.GetDriverVolumeSumByDay("Traffic", store.Number, date) / totalWeekTraffic)) : 0.0M; // (LaborHours) * (DailyTrafficPercentOfWeek)
-            //table.NonSellHours =
+            table.BudgetHours = (totalWeekTraffic != 0) ? (totalWeekLaborHours * (_historicDataService.GetDriverVolumeSumByDay("Traffic", store.Number, date) / totalWeekTraffic)) : 0.0M; // (TotalWeekLaborHours) * (DailyTrafficPercentOfWeek)
+            table.NonSellHours = _taskCalendarService.GetNonSellHoursSum(store, date);
 
             table.SellingHours = table.BudgetHours - table.BaseHours - table.NonSellHours;
             if(timeInc == 96)

@@ -27,7 +27,9 @@ namespace OnTaskV2.DAL
         public DbSet<Department> Departments { get; set; }
         public DbSet<LaborStandard> LaborStandards { get; set; }
         public DbSet<TaskElement> TaskElements { get; set; }
-
+        public DbSet<TaskCalendar> TaskCalendars { get; set; }
+        public DbSet<NonSellTask> NonSellTasks { get; set; }
+        public DbSet<NonSellWeekHour> NonSellWeekHours { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

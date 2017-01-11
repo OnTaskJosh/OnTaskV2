@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using OnTaskV2.Models.DataModels;
+using System.Data.Entity.Migrations;
+
+
 
 namespace OnTaskV2.DAL
 {
@@ -15,14 +18,14 @@ namespace OnTaskV2.DAL
             {
                 new Client{ID = 1, Name = "NRF Demo", OrgHierarchy = new OrgHierarchy{ID = 1} },
             };
-            clients.ForEach(s => dbContext.Clients.Add(s));
+            clients.ForEach(s => dbContext.Clients.AddOrUpdate(s));
             dbContext.SaveChanges();
 
             var countries = new List<Country>
             {
                 new Country{ ID = 1, Name = "United States", OrgHierarchyID = 1},
             };
-            countries.ForEach(s => dbContext.Countries.Add(s));
+            countries.ForEach(s => dbContext.Countries.AddOrUpdate(s));
             dbContext.SaveChanges();
 
             var divisions = new List<Division>
@@ -30,7 +33,7 @@ namespace OnTaskV2.DAL
                 new Division{ID = 1, Name = "Premium Stores", CountryID = 1 },
                 new Division{ID = 2, Name = "Outlet Stores", CountryID = 1 },
             };
-            divisions.ForEach(s => dbContext.Divisions.Add(s));
+            divisions.ForEach(s => dbContext.Divisions.AddOrUpdate(s));
             dbContext.SaveChanges();
 
             var regions = new List<Region>
@@ -40,7 +43,7 @@ namespace OnTaskV2.DAL
                 new Region{ID = 3, Name = "Outlet East", DivisionID = 2 },
                 new Region{ID = 4, Name = "Outlet West", DivisionID = 2 },
             };
-            regions.ForEach(s => dbContext.Regions.Add(s));
+            regions.ForEach(s => dbContext.Regions.AddOrUpdate(s));
             dbContext.SaveChanges();
 
             var districts = new List<District>
@@ -48,7 +51,7 @@ namespace OnTaskV2.DAL
                 new District{ID = 1, Name = "New England", RegionID = 1 },
                 new District{ID = 2, Name = "South East", RegionID = 1 },
             };
-            districts.ForEach(s => dbContext.Districts.Add(s));
+            districts.ForEach(s => dbContext.Districts.AddOrUpdate(s));
             dbContext.SaveChanges();
 
             var stores = new List<Store>
@@ -56,34 +59,51 @@ namespace OnTaskV2.DAL
                 new Store{ID = 1, Name = "NYC - Manhattan", Number = 100, DistrictID = 1 },
                 new Store{ID = 2, Name = "FL - Orlando", Number = 101, DistrictID = 2 },
             };
-            stores.ForEach(s => dbContext.Stores.Add(s));
+            stores.ForEach(s => dbContext.Stores.AddOrUpdate(s));
             dbContext.SaveChanges();
 
             var storeAttributes = new List<StoreAttribute>
             {
-                new StoreAttribute{ID = 1, StoreID = 1, Name = "SundayOpen", Value = "01/01/1900 00:00:00" },
-                new StoreAttribute{ID = 2, StoreID = 1, Name = "SundayClose", Value = "01/02/1900 00:00:00" },
-                new StoreAttribute{ID = 3, StoreID = 1, Name = "MondayOpen", Value = "01/01/1900 00:00:00" },
-                new StoreAttribute{ID = 4, StoreID = 1, Name = "MondayClose", Value = "01/02/1900 00:00:00" },
-                new StoreAttribute{ID = 5, StoreID = 1, Name = "TuesdayOpen", Value = "01/01/1900 00:00:00" },
-                new StoreAttribute{ID = 6, StoreID = 1, Name = "TuesdayClose", Value = "01/02/1900 00:00:00" },
-                new StoreAttribute{ID = 7, StoreID = 1, Name = "WednesdayOpen", Value = "01/01/1900 00:00:00" },
-                new StoreAttribute{ID = 8, StoreID = 1, Name = "WednesdayClose", Value = "01/02/1900 00:00:00" },
-                new StoreAttribute{ID = 9, StoreID = 1, Name = "ThursdayOpen", Value = "01/01/1900 00:00:00" },
-                new StoreAttribute{ID = 10, StoreID = 1, Name = "ThursdayClose", Value = "01/02/1900 00:00:00" },
-                new StoreAttribute{ID = 11, StoreID = 1, Name = "FridayOpen", Value = "01/01/1900 00:00:00" },
-                new StoreAttribute{ID = 12, StoreID = 1, Name = "FridayClose", Value = "01/02/1900 00:00:00" },
-                new StoreAttribute{ID = 13, StoreID = 1, Name = "SaturdayOpen", Value = "01/01/1900 00:00:00" },
-                new StoreAttribute{ID = 14, StoreID = 1, Name = "SaturdayClose", Value = "01/02/1900 00:00:00" },
-                new StoreAttribute{ID = 15, StoreID = 1, Name = "SundayBaseCoverage", Value = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0" },
-                new StoreAttribute{ID = 16, StoreID = 1, Name = "MondayBaseCoverage", Value = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0" },
-                new StoreAttribute{ID = 17, StoreID = 1, Name = "TuesdayBaseCoverage", Value = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0" },
-                new StoreAttribute{ID = 18, StoreID = 1, Name = "WednesdayBaseCoverage", Value = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0" },
-                new StoreAttribute{ID = 19, StoreID = 1, Name = "ThursdayBaseCoverage", Value = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0" },
-                new StoreAttribute{ID = 20, StoreID = 1, Name = "FridayBaseCoverage", Value = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0" },
-                new StoreAttribute{ID = 21, StoreID = 1, Name = "SaturdayBaseCoverage", Value = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0" },
+                new StoreAttribute{ID = 1, StoreID = 1, Name = "SundayOpen", Value = "01/01/1900 10:00:00" },
+                new StoreAttribute{ID = 2, StoreID = 1, Name = "SundayClose", Value = "01/02/1900 20:00:00" },
+                new StoreAttribute{ID = 3, StoreID = 1, Name = "MondayOpen", Value = "01/01/1900 09:00:00" },
+                new StoreAttribute{ID = 4, StoreID = 1, Name = "MondayClose", Value = "01/02/1900 21:00:00" },
+                new StoreAttribute{ID = 5, StoreID = 1, Name = "TuesdayOpen", Value = "01/01/1900 09:00:00" },
+                new StoreAttribute{ID = 6, StoreID = 1, Name = "TuesdayClose", Value = "01/02/1900 21:00:00" },
+                new StoreAttribute{ID = 7, StoreID = 1, Name = "WednesdayOpen", Value = "01/01/1900 09:00:00" },
+                new StoreAttribute{ID = 8, StoreID = 1, Name = "WednesdayClose", Value = "01/02/1900 21:00:00" },
+                new StoreAttribute{ID = 9, StoreID = 1, Name = "ThursdayOpen", Value = "01/01/1900 09:00:00" },
+                new StoreAttribute{ID = 10, StoreID = 1, Name = "ThursdayClose", Value = "01/02/1900 21:00:00" },
+                new StoreAttribute{ID = 11, StoreID = 1, Name = "FridayOpen", Value = "01/01/1900 09:00:00" },
+                new StoreAttribute{ID = 12, StoreID = 1, Name = "FridayClose", Value = "01/02/1900 21:00:00" },
+                new StoreAttribute{ID = 13, StoreID = 1, Name = "SaturdayOpen", Value = "01/01/1900 09:00:00" },
+                new StoreAttribute{ID = 14, StoreID = 1, Name = "SaturdayClose", Value = "01/02/1900 21:00:00" },
+                new StoreAttribute{ID = 15, StoreID = 1, Name = "SundayBaseCoverage", Value = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0" }, //open 10am-8pm
+                new StoreAttribute{ID = 16, StoreID = 1, Name = "MondayBaseCoverage", Value = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0" }, //open 9am-9pm
+                new StoreAttribute{ID = 17, StoreID = 1, Name = "TuesdayBaseCoverage", Value = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0" }, //open 9am-9pm
+                new StoreAttribute{ID = 18, StoreID = 1, Name = "WednesdayBaseCoverage", Value = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0" }, //open 9am-9pm
+                new StoreAttribute{ID = 19, StoreID = 1, Name = "ThursdayBaseCoverage", Value = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0" }, //open 9am-9pm
+                new StoreAttribute{ID = 20, StoreID = 1, Name = "FridayBaseCoverage", Value = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0" }, //open 9am-9pm
+                new StoreAttribute{ID = 21, StoreID = 1, Name = "SaturdayBaseCoverage", Value = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0" }, //open 9am-9pm
             };
-            storeAttributes.ForEach(s => dbContext.StoreAttributes.Add(s));
+            storeAttributes.ForEach(s => dbContext.StoreAttributes.AddOrUpdate(s));
+            dbContext.SaveChanges();
+
+            var nonSellWeekHours = new List<NonSellWeekHour>
+            {
+                new NonSellWeekHour{
+                    StoreID = 1,
+                    StartOfWeekDate = new DateTime(2016,11,06,0,0,0,0,DateTimeKind.Local),
+                    SundayNonSellHours = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0", //9am-10am open, 9pm-10pm close
+                    MondayNonSellHours = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0", //8am-9am open, 10pm-11pm close
+                    TuesdayNonSellHours = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0" , //8am-9am open, 10pm-11pm close
+                    WednesdayNonSellHours = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0", //8am-9am open, 10pm-11pm close
+                    ThursdayNonSellHours = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0", //8am-9am open, 10pm-11pm close
+                    FridayNonSellHours = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0", //8am-9am open, 10pm-11pm close
+                    SaturdayNonSellHours = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0", //8am-9am open, 10pm-11pm close
+                },
+            };
+            nonSellWeekHours.ForEach(s => dbContext.NonSellWeekHours.AddOrUpdate(s));
             dbContext.SaveChanges();
 
             var historicData = new List<HistoricData>
@@ -582,7 +602,7 @@ namespace OnTaskV2.DAL
                 new HistoricData {StoreNumber = 100, DriverName = "LaborHours", Date = new DateTime(2016,11,12,0,0,0,0,DateTimeKind.Local), Time = new DateTime(1900,1,1,23,0,0,0,DateTimeKind.Local), Quantity =  0},
 
             };
-            historicData.ForEach(s => dbContext.HistoricData.Add(s));
+            historicData.ForEach(s => dbContext.HistoricData.AddOrUpdate(s));
             dbContext.SaveChanges();
         }
     }

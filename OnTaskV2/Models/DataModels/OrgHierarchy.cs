@@ -77,7 +77,10 @@ namespace OnTaskV2.Models.DataModels
         [ForeignKey("District")]
         public int DistrictID { get; set; }
         public virtual District District { get; set; } //Navigation Property
-        public virtual ICollection<StoreAttribute> Attributes { get; set; } 
+        public virtual ICollection<StoreAttribute> Attributes { get; set; } //Navigation Property
+        public virtual ICollection<TaskCalendar> TaskCalendars { get; set; } //Navigation Property
+        public virtual ICollection<NonSellWeekHour> NonSellWeekHours { get; set; } //Navigation Property
+        public virtual ICollection<NonSellTask> NonSellTasks { get; set; } //Navigation Property
 
         public string Name { get; set; }
         public int Number { get; set; }
